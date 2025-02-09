@@ -1,0 +1,209 @@
+/* -------------------------------------------- BANNER PRINCIPAL -------------------------------------------- */
+.banner_principal{
+    background-attachment: fixed;
+    width: 100%;
+    height: 80%;
+    background-image: url('/foto_banner.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+.descricao_banner{
+    width: 55%;
+    padding: 3%;
+    padding-top: 80px;
+}
+
+.descricao_banner > h5{
+    color: green;
+    padding: 10px 0;
+    font-size: 17px;
+    font-weight: bold;
+}
+
+.descricao_banner > p{
+    font-size: 15px;
+    font-weight: 400;
+}
+
+.nome_anime_banner{
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+}
+
+.nome_anime_banner p{
+    font-size: 20px;
+    height: 100%;
+    margin-left: 10px;
+}
+
+
+.buttons_banner{
+    display: flex;
+}
+
+.buttons_banner img{
+    width: 15px;
+    margin-right: 5px;
+    height: 15px;
+}
+
+.adicionar{
+    background-color: #1b1d1f;
+    color: white;
+}
+
+.adicionar:hover{
+    background-color: black;
+}
+
+.buttons_banner button{
+    margin: 30px 0;
+    width: 120px;
+    height: 35px;
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    cursor: pointer;
+    border: 1px solid black;
+    border-radius: 3px;
+}
+
+.buttons_banner button:hover{
+    border: 1px solid blueviolet;
+}
+
+.play{
+    margin-right: 20px!important;
+}
+
+.play:hover{
+    border: 2px solid blueviolet;
+}
+
+/* -------------------------------------------- BUTTONS -------------------------------------------- */
+.buttons{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+
+
+.buttons button:hover{
+    opacity: 1;
+}
+
+.buttons button{
+    position: absolute;
+    cursor: pointer;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    z-index: 200;
+    border: 0;
+    opacity: 0.7;
+}
+
+.avancar{
+    top: 50%;
+    left: 100%;
+    transform: translate(-110%,-50%);
+    background-image: url('/botao-passar.png');
+    background-size: cover;
+}
+
+.voltar{
+    top: 43%;
+    transform: translateY(-50%);
+    background-image: url('/botao-passar.png');
+    background-size: cover;
+    transform: rotate(180deg);
+    display: none;
+}
+
+
+
+
+/* -------------------------------------------- LISTA DE ANIMES -------------------------------------------- */
+
+.animes{
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-flow: column wrap;
+    overflow-x: scroll;
+    margin-top: -80px;
+    overflow: hidden;
+}
+
+
+.acao > h3{
+    margin: 20px;
+}
+
+
+.acao, .romance, .ecchi, .psicologico{
+    height: 340px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.romance > h3, .ecchi > h3, .psicologico > h3{
+    padding: 20px 0 10px 20px;
+}
+
+.container_1, .container_2, .container_3, .container_4{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    transition: 1s;
+    z-index: 100;
+    position: relative;
+    left: 0;
+}
+
+
+
+/* -------------------------------------------- MEDIA SCREENS -------------------------------------------- */
+
+@media screen and (max-width: 750px) {
+    .banner_principal {
+        height: 550px;
+        background-position-x: -700px;
+    }
+
+    .descricao_banner {
+        font-size: 13px;
+        width: 80%;
+        padding-top: 30px;
+    }
+
+    .anime_single {
+        height: 190px;
+        min-width: 100px;
+        max-width: 100px;
+    }
+
+    .anime_single h3, .anime_single p { font-size: 10px; }
+
+    .acao, .romance, .psicologico, .ecchi { height: 250px !important; }
+}
+
+@media screen and (max-width: 580px) {
+    .banner_principal { background-position-x: -820px !important; }
+
+    .text { display: none; }
+}
+
+@media screen and (max-width: 390px) {
+    .banner_principal { background-position-x: -880px !important; }
+
+    .nome_anime_banner h1 { font-size: 20px !important; }
+}

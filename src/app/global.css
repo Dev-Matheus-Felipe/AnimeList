@@ -1,0 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+/* -------------------------------------------- PRIMORDIAIS -------------------------------------------- */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Roboto", serif!important;
+    font-style: normal; 
+}
+
+html,body{
+    height: 100%;
+    color: white;
+    font-weight: 400;
+}
+
+
+html{
+  background-color: #2a2d30;
+}
