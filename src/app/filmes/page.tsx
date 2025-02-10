@@ -43,7 +43,11 @@ export default  function Filmes(){
                 </p>
 
                 <div className="buttons_banner">
-                    <button className='play'><img src="/botao-play.png" alt="play"/>Assistir</button>
+                    <a className='play' href= "https://animefire.plus/animes/seishun-buta-yarou-wa-yumemiru-shoujo-no-yume-wo-minai-todos-os-episodios" target='_blank'>
+                      <img src="/botao-play.png" alt="play" />
+                      <p>Assistir</p>
+                    </a>
+
                     <button className='adicionar'>+ Adicionar</button>
                 </div>
             </div>

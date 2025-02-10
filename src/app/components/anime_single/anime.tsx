@@ -26,15 +26,18 @@ export function Anime( {anime}: {anime: Ianime[]}){
 
     const mostrarAnime = (e: Ianime) : void => {
         const title = encodeURIComponent(e.title);
+        const generos : string[] = [];
+        e.genres.map((e)=>generos.push(e.name))
 
         const query = new URLSearchParams({
             title: e.title,
             score: e.score.toString(),
             image: e.image,
             synopsis: e.synopsis,
-            genres: e.genres.join(','),
+            genres: generos.join(','),
             path: path,
         }).toString(); 
+
         
         router.push(`/anime/${title}?${query}`);
         

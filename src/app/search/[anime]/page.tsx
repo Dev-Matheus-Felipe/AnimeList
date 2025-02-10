@@ -48,13 +48,16 @@
         // ----------- || ----------- //
 
         const mostrarAnime = (e: Ianime) : void => {
+            const generos : string[] = [];
+            e.genres.map((e)=>generos.push(e.name));
+
             const title = encodeURIComponent(e.title);    
             const query = new URLSearchParams({
                 title: e.title,
                 score: (e.score ?? '-').toString(),
                 image: e.image,
                 synopsis: (e.synopsis ?? 'Sem sinopse...'),
-                genres: e.genres.join(','),
+                genres: generos.join(','),
                 path: pathname,
                 page: page.toString()
             }).toString(); 

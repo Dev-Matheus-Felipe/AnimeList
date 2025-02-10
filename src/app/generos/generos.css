@@ -4,7 +4,7 @@
     flex-flow: row wrap;
     justify-content: space-around;
     align-items: flex-start;
-    padding: 1%;
+    padding: 2%;
     gap: 20px;
 }
 
@@ -140,8 +140,12 @@
 }
 
 
-
-
+.procurar{
+    width: 100%;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+}
 
 @media (max-width: 768px) {
     .generos-container {
@@ -169,4 +173,12 @@
 
 .procurar{
     text-align: center;
+}
+
+
+
+@media (max-width: 768px) {
+    .procurar h1{
+        font-size: 20px;
+    }
 }

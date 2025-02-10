@@ -40,7 +40,7 @@
 /* -------------------------------------------- BANNER PRINCIPAL -------------------------------------------- */
 
 .banner_principal_filmes{
-    background-attachment: fixed;
+
     width: 100%;
     height: 80%;
     background-image: url('/teste2.jpg');
@@ -96,7 +96,7 @@
             background-color: black;
         }
 
-        & button{
+        & button, .play{
             margin: 30px 0;
             width: 120px;
             height: 35px;
@@ -116,6 +116,9 @@
         }
 
         & .play{
+            background-color: white;
+            color: black;
+            text-decoration: none;
             margin-right: 20px;
         }
 
@@ -163,6 +166,7 @@
         z-index: 200;
         border: 0;
         opacity: 0.7;
+        margin-top: 30px;
 
     }
 }
@@ -188,6 +192,8 @@
     
         & > h3{
             margin: 20px;
+            padding: 20px 0 10px 20px;
+
         }
     
         & .container_1{
@@ -233,47 +239,58 @@
 
 /* -------------------------------------------- MEDIA SCREENS -------------------------------------------- */
 
-@media screen and (max-width:750px){
-
+@media screen and (max-width: 750px) {
     .banner_principal_filmes{
-        height: 550px;
-     
-
-        .descricao_banner{
-            font-size: 13px;
-            width: 80%;
-            padding-top: 30px;
-        }
-
+        height: 550px;       
     }
 
-    .anime_single{
-        height: 190px;
-
-        min-width: 100px;
-        max-width: 100px;
-
-        & h3, p{
-            font-size: 10px;
-        }
-
+    .descricao_banner {
+        font-size: 13px;
+        width: 80%;
+        padding-top: 30px;
     }
 
-    .acao, .romance, .psicologico, .ecchi{  
-        height: 250px!important;
+    .anime_single h3, .anime_single p { font-size: 10px; }
+    
+    .acao h3, .romance h3, .psicologico h3, .ecchi h3{ margin: 10px 0!important; }
+
+    .acao, .romance, .psicologico, .ecchi { height: auto!important; margin: 20px 0; }
+
+    .animes{
+        margin-top: -30px;
     }
+
 }
 
-
-@media screen and (max-width:580px){
-    .banner_principal_filmes{
-
-
-        & .text{
-            display: none;
-        }
+@media screen and (max-width: 580px) {
+    .descricao_banner{ 
+        width: 100%!important;
+        text-align: center;
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: center;
     }
+
+    .nome_anime_banner{
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .text { display: none; }
 }
-@media screen and (max-width:390px){ 
-    .banner_principal_filmes{& .nome_anime_banner h1{font-size: 20px!important;} } 
+
+@media screen and (max-width: 410px) {
+
+    .anime_single img{
+        height: 5%!important;
+    }
+
+    .nome_anime_banner h1 { font-size: 20px !important; }
+
+    .buttons button{
+        width: 35px;
+        height: 35px;
+    }
 }

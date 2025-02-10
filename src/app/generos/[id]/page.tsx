@@ -50,12 +50,15 @@ export default function Search(){
 
     const mostrarAnime = (e: Ianime) : void => {
         const title = encodeURIComponent(e.title);
+        const generos : string[] = [];
+        e.genres.map((e)=>generos.push(e.name));
+
         const query = new URLSearchParams({
             title: e.title,
             score: (e.score ?? '-').toString(),    
             image: e.image,
             synopsis: e.synopsis ?? "Este anime não possui sinopse...",
-            genres: e.genres.join(','),
+            genres: generos.join(','),
             path: pathname,
             genreNumber: genres.join(','),
             page: page.toString()

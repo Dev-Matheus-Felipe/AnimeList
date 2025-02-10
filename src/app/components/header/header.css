@@ -67,12 +67,20 @@
 
 
 @media screen and (max-width:970px){
-    .link_container{ display: none; }
 
     .navegation{
-        justify-content: flex-start;
-        width: 140px!important;
+        justify-content: space-between!important;
+        width: auto!important;
     }
+
+    .link_container{
+        width: 100%!important;
+    }
+    .logo{
+       display: none;
+    }
+
+
 }
 
 
@@ -85,4 +93,18 @@
             width: 200px;
         }
     }
+
+    .link_container .link{
+        font-size: 12px!important;
+    }
 }
+
+@media screen and (max-width:610px){
+    .header{
+        justify-content: center;
+        height: 100px;
+    }
+}
+
+
+

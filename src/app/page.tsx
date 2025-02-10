@@ -44,10 +44,11 @@ export default function Home() {
           </p>
 
           <div className="buttons_banner">
-            <button className='play'>
+            <a className='play' href= "https://animesonlinecc.to/anime/sousou-no-frieren/" target='_blank'>
               <img src="/botao-play.png" alt="play" />
-              Assistir
-            </button>
+              <p>Assistir</p>
+            </a>
+            
             <button className='adicionar'>+ Adicionar</button>
           </div>
         </div>
