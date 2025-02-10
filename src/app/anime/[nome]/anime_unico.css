@@ -1,17 +1,19 @@
 .A_flex{
     display: flex;
-    flex-flow: column wrap;
+    flex-wrap: wrap;
     align-items: center;
+    justify-content: center;
     margin: 50px;
     gap: 20px;
 }
 
 .container {
     width: 90%;
-    max-width: 900px;
+    width: 850px;
     display: flex;
     align-items: flex-start;
-    flex-wrap: wrap;
+    justify-content: center;
+    flex-flow: row wrap;
     padding: 20px;
     border-radius: 12px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
@@ -30,6 +32,7 @@
   
   .img_anime img {
     width: 100%;
+    height: 100%;
     max-width: 300px;
     border-radius: 10px;
     object-fit: cover;
@@ -38,7 +41,7 @@
   
   
   .descricao {
-    flex: 2;
+    flex: 1 1 300px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -101,3 +104,48 @@
     color: white;
     background-color: blueviolet;
 }
+
+
+@media screen and ( max-width: 930px){
+  .container{
+    width: auto;
+    max-width: 900px;
+  }
+
+  .descricao p{
+    font-size: 12px;
+  }
+}
+
+@media screen and ( max-width: 830px){
+  .descricao p{
+    font-size: 10px;
+  }
+}
+
+@media screen and ( max-width: 630px){
+
+  .A_flex{
+    width: 100%;
+    margin: 0;
+    padding-bottom: 50px;
+  }
+
+  .container{
+    width: 100%!important;
+  }
+
+  .generos{
+    justify-content: center;
+  }
+
+  .generos span{
+    font-size: 12px;
+  }
+
+  .img_anime{
+    height: 300px;
+    width: 100%;
+  }
+}
+
