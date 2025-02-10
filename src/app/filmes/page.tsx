@@ -20,7 +20,10 @@ export default  function Filmes(){
       const animes : Ianime[][] = await Promise.all(
         generos.map((e) => fetchAnimes({ page: 1, genero: [e], movie: true}))
       );
-      setListasAnimes(animes);  
+       
+      setTimeout(()=>{
+        setListasAnimes(animes);
+      },500)
     }
 
     loadAnimes();
