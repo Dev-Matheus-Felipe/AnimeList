@@ -10,7 +10,7 @@ export default function Home() {
 
   // ----------- || ----------- //
 
-  const generos: number[] = [2, 22, 9, 40];
+  const generos: number[] = [2, 22, 40, 40];
   const [listasAnimes, setListasAnimes] = useState<Ianime[][]>([]); 
 
   // ----------- || ----------- //
