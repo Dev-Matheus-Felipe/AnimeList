@@ -10,7 +10,7 @@ export default  function Filmes(){
 
   // ----------- || ----------- //
 
-  const generos: number[] = [1, 31, 32, 30]; 
+  const generos: number[] = [1, 31, 32, 36]; 
   const [listasAnimes, setListasAnimes] = useState<Ianime[][]>([]);
 
   // ----------- || ----------- //
@@ -20,7 +20,7 @@ export default  function Filmes(){
       const animes : Ianime[][] = await Promise.all(
         generos.map((e) => fetchAnimes({ page: 1, genero: [e], movie: true}))
       );
-       
+
       setTimeout(()=>{
         setListasAnimes(animes);
       },500)
@@ -110,7 +110,7 @@ export default  function Filmes(){
 
     
           <div className="psicologico">
-            <h3>Esportes</h3>
+            <h3>Slice of Life</h3>
   
             <div className="buttons btn-4">
               <Button number={4} direction="voltar" />
