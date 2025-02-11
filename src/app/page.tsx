@@ -4,6 +4,7 @@ import { Anime, Ianime } from './components/anime_single/anime';
 import { Button } from './components/buttons/Button';
 import { fetchAnimes } from './lib/api';
 import './home.css';
+import { Suspense } from 'react';
 
 export default async function Home() {
 
@@ -50,7 +51,9 @@ export default async function Home() {
             <Button number={1} direction="avancar" />
           </div>
           <div className="container_1">
-            <Anime anime={listasAnimes[0]} />
+            <Suspense>
+              <Anime anime={listasAnimes[0]} />
+            </Suspense>
           </div>
         </div>
 
@@ -61,7 +64,9 @@ export default async function Home() {
             <Button number={2} direction="avancar" />
           </div>
           <div className="container_2">
-            <Anime anime={listasAnimes[1]} />
+            <Suspense>
+              <Anime anime={listasAnimes[1]} />
+            </Suspense>
           </div>
         </div>
 
@@ -72,7 +77,9 @@ export default async function Home() {
             <Button number={3} direction="avancar" />
           </div>
           <div className="container_3">
-            <Anime anime={listasAnimes[2]} />
+            <Suspense>
+              <Anime anime={listasAnimes[2]} /> 
+            </Suspense>
           </div>
         </div>
 
@@ -83,7 +90,9 @@ export default async function Home() {
             <Button number={4} direction="avancar" />
           </div>
           <div className="container_4">
-            <Anime anime={listasAnimes[3]} />
+            <Suspense>
+              <Anime anime={listasAnimes[3]} />
+            </Suspense>
           </div>
         </div>
       </div>
