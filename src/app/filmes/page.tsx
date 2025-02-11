@@ -17,18 +17,25 @@ export default  function Filmes(){
 
   useEffect(() => {
     async function loadAnimes() {
-      const animes : Ianime[][] = await Promise.all(
-        generos.map((e) => fetchAnimes({ page: 1, genero: [e], movie: true}))
-      );
-
-      console.log(animes);
-      setTimeout(()=>{
-        setListasAnimes(animes);
-      },1000)
+      const animes: Ianime[][] = [];
+  
+      for (const genero of generos) {
+        try {
+          const result = await fetchAnimes({ page: 1, genero: [genero] });
+          animes.push(result);
+          await new Promise(res => setTimeout(res, 1000)); // Delay de 1 segundo entre requisições
+        } catch (error) {
+          console.error(`Erro ao carregar animes do gênero ${genero}:`, error);
+          animes.push([]); // Evita que o componente quebre se falhar
+        }
+      }
+  
+      setListasAnimes(animes);
     }
-
+  
     loadAnimes();
   }, []);
+  
 
   return(
       <>
