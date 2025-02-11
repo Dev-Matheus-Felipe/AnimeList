@@ -133,11 +133,9 @@
 
   .container{
     width: 100%!important;
+    box-shadow: 0 0 0!important;
   }
 
-  .generos{
-    justify-content: center;
-  }
 
   .generos span{
     font-size: 12px;
@@ -146,6 +144,17 @@
   .img_anime{
     height: 300px;
     width: 100%;
+  }
+}
+
+
+@media screen and ( max-width: 400px){
+  .genero{
+    font-size: 10px!important;
+  }
+
+  .descricao h1{
+    font-size: 15px;
   }
 }
 

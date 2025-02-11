@@ -21,9 +21,10 @@ export default  function Filmes(){
         generos.map((e) => fetchAnimes({ page: 1, genero: [e], movie: true}))
       );
 
+      console.log(animes);
       setTimeout(()=>{
         setListasAnimes(animes);
-      },500)
+      },1000)
     }
 
     loadAnimes();

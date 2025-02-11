@@ -172,10 +172,6 @@
     }
 }
 
-.procurar{
-    text-align: center;
-}
-
 
 
 @media (max-width: 768px) {
@@ -186,17 +182,19 @@
 
 
 
-
 @media (max-width: 570px) {
     .procurar{
-        width: 100%;
+        width: 100%;;
     }
 
-    .genero-item-escolhido, .genero-item{
-        font-size: 10px!important;
+    .genero-item, .genero-item-escolhido{
+        padding: 10px 10px;
+        font-size: 10px;
     }
 
-    .genero-item{
-        padding: 10px 15px;
+    .titulo{
+        font-size: 20px;
     }
+    
 }
+
