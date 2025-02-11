@@ -21,6 +21,8 @@ export default function Home() {
       const animes : Ianime[][] = await Promise.all(
         generos.map(async(e) => await fetchAnimes({ page: 1, genero: [e] }))
       );
+
+      setListasAnimes(animes);
     }
 
     loadAnimes();
