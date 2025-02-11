@@ -1,4 +1,6 @@
-import { Ianime, generos } from "../components/anime_single/anime";  // Certifique-se de que generos esteja correto
+'use server'
+
+import { Ianime, generos } from "../components/anime_single/anime"; 
 
 interface Criterios {
     page: number;
@@ -22,6 +24,7 @@ interface APIResponse {
 }
 
 export async function fetchAnimes(criterios: Criterios): Promise<Ianime[]> {
+
     const animes: Ianime[] = [];
     let baseUrl: string;
 
