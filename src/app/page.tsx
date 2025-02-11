@@ -22,6 +22,12 @@ export default function Home() {
         generos.map(async(e) => await fetchAnimes({ page: 1, genero: [e] }))
       );
 
+      animes.map((e)=>{
+        if(e.length == 0){
+          generos.map(async(e) => await fetchAnimes({ page: 1, genero: [e] }))
+        }
+      })
+
       setListasAnimes(animes);
     }
 

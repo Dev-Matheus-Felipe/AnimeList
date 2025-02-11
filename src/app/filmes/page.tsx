@@ -18,8 +18,14 @@ export default  function Filmes(){
   useEffect(() => {
     async function loadAnimes() {
       const animes : Ianime[][] = await Promise.all(
-        generos.map( async(e) => await fetchAnimes({ page: 1, genero: [e], movie: true}))
-      );  
+        generos.map(async(e) => await fetchAnimes({ page: 1, genero: [e] }))
+      );
+
+      animes.map((e)=>{
+        if(e.length == 0){
+          generos.map(async(e) => await fetchAnimes({ page: 1, genero: [e] }))
+        }
+      })
 
       setListasAnimes(animes);
     }

@@ -108,6 +108,7 @@
 
 
 .avancar, .voltar{
+    margin-top: 20px;
     visibility: hidden;
 }
 
@@ -121,10 +122,16 @@
     }
 
     .animes{
-        gap: 1px;
+        gap: 10px;
     }
 
     .anime_single h3, .nota_anime_single p{
         font-size: 10px!important;
+    }
+}
+
+@media (max-width: 439px) {
+    .animes{
+        gap: 10px;
     }
 }
