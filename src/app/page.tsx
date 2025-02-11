@@ -1,38 +1,19 @@
-'use client'
+'use server'
 
-import { Suspense, useState, useEffect } from 'react';
 import { Anime, Ianime } from './components/anime_single/anime';
 import { Button } from './components/buttons/Button';
 import { fetchAnimes } from './lib/api';
 import './home.css';
 
-
-export default function Home() {
-
-  // ----------- || ----------- //
-
-  const generos: number[] = [2, 22, 35, 40];
-  const [listasAnimes, setListasAnimes] = useState<Ianime[][]>([]); 
+export default async function Home() {
 
   // ----------- || ----------- //
 
-  useEffect(() => {
-    async function loadAnimes() {
-      const animes : Ianime[][] = await Promise.all(
-        generos.map(async(e) => await fetchAnimes({ page: 1, genero: [e] }))
-      );
+  const generos: number[] = [1, 31, 32, 36]; 
 
-      animes.map((e)=>{
-        if(e.length == 0){
-          generos.map(async(e) => await fetchAnimes({ page: 1, genero: [e] }))
-        }
-      })
-
-      setListasAnimes(animes);
-    }
-
-    loadAnimes();
-  }, []);
+  const listasAnimes : Ianime[][] = await Promise.all(
+    generos.map(async(e) => await fetchAnimes({ page: 1, genero: [e] }))
+  );
 
   return (
     <>
@@ -69,9 +50,7 @@ export default function Home() {
             <Button number={1} direction="avancar" />
           </div>
           <div className="container_1">
-            <Suspense fallback={<h1>Carregando Ação...</h1>}>
-              <Anime anime={listasAnimes[0]} />
-            </Suspense>
+            <Anime anime={listasAnimes[0]} />
           </div>
         </div>
 
@@ -82,9 +61,7 @@ export default function Home() {
             <Button number={2} direction="avancar" />
           </div>
           <div className="container_2">
-            <Suspense fallback={<h1>Carregando Romance...</h1>}>
-              <Anime anime={listasAnimes[1]} />
-            </Suspense>
+            <Anime anime={listasAnimes[1]} />
           </div>
         </div>
 
@@ -95,9 +72,7 @@ export default function Home() {
             <Button number={3} direction="avancar" />
           </div>
           <div className="container_3">
-            <Suspense fallback={<h1>Carregando Ecchi...</h1>}>
-              <Anime anime={listasAnimes[2]} />
-            </Suspense>
+            <Anime anime={listasAnimes[2]} />
           </div>
         </div>
 
@@ -108,9 +83,7 @@ export default function Home() {
             <Button number={4} direction="avancar" />
           </div>
           <div className="container_4">
-            <Suspense fallback={<h1>Carregando Psicológico...</h1>}>
-              <Anime anime={listasAnimes[3]} />
-            </Suspense>
+            <Anime anime={listasAnimes[3]} />
           </div>
         </div>
       </div>

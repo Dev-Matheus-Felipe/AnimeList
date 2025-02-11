@@ -19,7 +19,7 @@ interface APIResponse {
             };
         };
         synopsis: string;
-        genres: { name: string }[];  // A resposta da API traz 'genres' como um array de objetos com 'name' como string
+        genres: { name: string }[]; 
     }[];
 }
 
@@ -34,7 +34,6 @@ export async function fetchAnimes(criterios: Criterios): Promise<Ianime[]> {
 
     baseUrl += (criterios.genero) ? `&genres=${criterios.genero}` : `&q=${criterios.search}`;
 
-    // Requisição para a API
     const response: Response = await fetch(baseUrl, {
         cache: 'force-cache',
         next: {
@@ -42,16 +41,14 @@ export async function fetchAnimes(criterios: Criterios): Promise<Ianime[]> {
         }
     });
 
-    // Tipagem explícita da resposta
     const data: APIResponse = await response.json();
 
     if (data && data.data) {
         data.data.map((e) => {
             const generos_list: generos[] = [];
 
-            // Agora estamos empurrando um objeto generos em vez de uma string simples
             e.genres.map((i: { name: string }) => {
-                generos_list.push({ name: i.name });  // Empurrando o objeto no formato correto { name: string }
+                generos_list.push({ name: i.name });
             });
 
             animes.push({
