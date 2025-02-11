@@ -1,21 +1,37 @@
-'use server'
+'use client'
 
-
-import { Suspense } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import { Anime, Ianime } from '../components/anime_single/anime';
 import { Button } from '../components/buttons/Button';
 import { fetchAnimes } from '../lib/api'
 import './filmes.css'
 
-export default async function Filmes(){
+export default  function Filmes(){
 
   // ----------- || ----------- //
 
   const generos: number[] = [1, 31, 32, 36]; 
+  const [listasAnimes, setListasAnimes] = useState<Ianime[][]>([]);
 
-  const listasAnimes : Ianime[][] = await Promise.all(
-    generos.map(async(e) => await fetchAnimes({ page: 1, genero: [e] }))
-  );
+  // ----------- || ----------- //
+
+  useEffect(() => {
+    async function loadAnimes() {
+      const animes : Ianime[][] = await Promise.all(
+        generos.map(async(e) => await fetchAnimes({ page: 1, genero: [e] }))
+      );
+
+      animes.map((e)=>{
+        if(e.length == 0){
+          generos.map(async(e) => await fetchAnimes({ page: 1, genero: [e] }))
+        }
+      })
+
+      setListasAnimes(animes);
+    }
+
+    loadAnimes();
+  }, []);
 
   return(
       <>
@@ -54,7 +70,7 @@ export default async function Filmes(){
             </div>
   
             <div className="container_1">
-              <Suspense>
+              <Suspense fallback={<h1>Carregando Ação...</h1>}>
                 <Anime anime={listasAnimes[0]} />
               </Suspense>
             </div>
@@ -72,7 +88,7 @@ export default async function Filmes(){
             </div>
   
             <div className="container_2">
-              <Suspense>
+              <Suspense fallback={<h1>Carregando Ação...</h1>}>
                 <Anime anime={listasAnimes[1]} />
               </Suspense>
             </div>
@@ -89,7 +105,7 @@ export default async function Filmes(){
             </div>
   
             <div className="container_3">
-              <Suspense>
+              <Suspense fallback={<h1>Carregando Ação...</h1>}>
                 <Anime anime={listasAnimes[2]} />
               </Suspense>
             </div>
@@ -106,7 +122,7 @@ export default async function Filmes(){
             </div>
   
             <div className="container_4">
-              <Suspense>
+              <Suspense fallback={<h1>Carregando Ação...</h1>}>
                 <Anime anime={listasAnimes[3]} />
               </Suspense>
             </div>
