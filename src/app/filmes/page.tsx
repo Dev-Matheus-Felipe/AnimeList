@@ -1,5 +1,6 @@
 'use server'
 
+
 import { Anime, Ianime } from '../components/anime_single/anime';
 import { Button } from '../components/buttons/Button';
 import { fetchAnimes } from '../lib/api'

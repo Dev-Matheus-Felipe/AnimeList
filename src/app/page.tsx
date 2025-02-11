@@ -9,7 +9,7 @@ export default async function Home() {
 
   // ----------- || ----------- //
 
-  const generos: number[] = [1, 31, 32, 36]; 
+  const generos: number[] = [1, 22, 9, 40]; 
 
   const listasAnimes : Ianime[][] = await Promise.all(
     generos.map(async(e) => await fetchAnimes({ page: 1, genero: [e] }))
