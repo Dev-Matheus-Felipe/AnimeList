@@ -6,6 +6,7 @@ import { Button } from './components/buttons/Button';
 import { fetchAnimes } from './lib/api';
 import './home.css';
 
+
 export default function Home() {
 
   // ----------- || ----------- //
@@ -17,25 +18,13 @@ export default function Home() {
 
   useEffect(() => {
     async function loadAnimes() {
-      const animes: Ianime[][] = [];
-  
-      for (const genero of generos) {
-        try {
-          const result = await fetchAnimes({ page: 1, genero: [genero] });
-          animes.push(result);
-          await new Promise(res => setTimeout(res, 1000)); // Delay de 1 segundo entre requisições
-        } catch (error) {
-          console.error(`Erro ao carregar animes do gênero ${genero}:`, error);
-          animes.push([]); // Evita que o componente quebre se falhar
-        }
-      }
-  
-      setListasAnimes(animes);
+      const animes : Ianime[][] = await Promise.all(
+        generos.map(async(e) => await fetchAnimes({ page: 1, genero: [e] }))
+      );
     }
-  
+
     loadAnimes();
   }, []);
-  
 
   return (
     <>
