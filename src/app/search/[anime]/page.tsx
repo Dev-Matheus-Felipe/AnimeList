@@ -85,7 +85,6 @@
 
         useEffect(()=>{
             const cache = sessionStorage.getItem(`search-${texto}-page-${page}`);
-            console.log(cache);
 
             if(cache){
                 setSearch(JSON.parse(cache));

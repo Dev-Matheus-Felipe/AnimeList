@@ -17,15 +17,20 @@ export default  function Filmes(){
 
   useEffect(() => {
     async function loadAnimes() {
-      const animes : Ianime[][] = await Promise.all(
-        generos.map(async(e) => await fetchAnimes({ page: 1, genero: [e], movie: true }))
-      );
+      const animes: Ianime[][] = await Promise.all(
+        generos.map(async (e) => {
+          const cachedAnimes = sessionStorage.getItem(`animes-gen-${e}`);
 
-      animes.map((e)=>{
-        if(e.length == 0){
-          generos.map(async(e) => await fetchAnimes({ page: 1, genero: [e], movie: true }))
-        }
-      })
+          if (cachedAnimes) {
+            return JSON.parse(cachedAnimes);
+            
+          } else {
+            const fetchedAnimes = await fetchAnimes({ page: 1, genero: [e], movie: true });
+            sessionStorage.setItem(`animes-gen-${e}`, JSON.stringify(fetchedAnimes));
+            return fetchedAnimes;
+          }
+        })
+      );
 
       setListasAnimes(animes);
     }
