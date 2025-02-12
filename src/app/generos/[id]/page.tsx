@@ -28,10 +28,19 @@ export default function Search(){
     // ----------- || ----------- //
 
     const animes_API = async() : Promise<void> => {
-        router.push(`${pathname}?genres=${genres}&page=${page}`) 
-        const animes = await fetchAnimes({page: page, movie: false, genero: genres});
-        setSearch(animes);
-        setLoading(false);
+        router.push(`${pathname}?genres=${genres}&page=${page}`)
+        const cache = sessionStorage.getItem(`generos-${page}`);
+
+        if(cache){
+            setSearch(JSON.parse(cache));
+            setLoading(false);
+        }else{
+            const animes = await fetchAnimes({page: page, movie: false, genero: genres});
+            sessionStorage.setItem(`generos-${page}`, JSON.stringify(animes));
+            setSearch(animes);
+            setLoading(false);
+        }
+        
     }
 
     const mover = (number: number) : void => {
