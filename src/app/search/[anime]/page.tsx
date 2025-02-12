@@ -34,6 +34,9 @@
             setLoading(true); 
             const animes = await fetchAnimes({ page: page, movie: false, search: texto });
             const aFiltro = animes.filter((e) => e.title.toLowerCase().includes(texto.toLowerCase()));
+
+            sessionStorage.setItem(`search-${texto}-page-${page}`, JSON.stringify(aFiltro));
+
             setSearch(aFiltro);
             setLoading(false);
         }
@@ -81,7 +84,15 @@
         // ----------- || ----------- //
 
         useEffect(()=>{
-            animes_API();
+            const cache = sessionStorage.getItem(`search-${texto}-page-${page}`);
+            console.log(cache);
+
+            if(cache){
+                setSearch(JSON.parse(cache));
+                setLoading(false);
+            }else{
+                animes_API();
+            }
         },[page])
 
         return (

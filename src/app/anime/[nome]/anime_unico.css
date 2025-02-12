@@ -71,9 +71,6 @@
     cursor: default;
   }
   
-  .genero:hover {
-    background-color: #836fff;
-  }
   
   .descricao p {
     font-size: 13px;
@@ -97,6 +94,7 @@
     color: white;
     cursor: pointer;
     transition: all 0.3s ease;
+    margin-bottom: 50px;
 }
 
 .voltar_router:hover {
