@@ -12,10 +12,10 @@ export default function Authentic(){
 
   // ----------- || ----------- //
   
-  const logar = async (e: any) : Promise<void> => {
+  const logar = async (e: React.FormEvent<HTMLFormElement>) : Promise<void> => {
     e.preventDefault();
 
-    const formData = new FormData(e.target);
+    const formData = new FormData(e.target  as HTMLFormElement);
     const formLogin = { email: formData.get("email"), senha: formData.get("senha") }
     const formCadastro = {...formLogin, nome: formData.get("nome")}
 
@@ -30,7 +30,11 @@ export default function Authentic(){
         console.log('Falha no login:', result.message || 'Resposta inválida');
       }
     } catch (error) {
-      console.log('Falha no login:', result.message || 'Resposta inválida');
+      if (error instanceof Error) {
+        console.log('Falha no login:', error.message || 'Erro desconhecido');
+      } else {
+        console.log('Falha no login: Erro desconhecido');
+      }    
     }
 
   };

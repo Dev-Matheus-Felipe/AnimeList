@@ -44,7 +44,7 @@ export default function Nome(){
 
     const changeAnime = async(id : number): Promise<void> =>{
         let animes;
-        let info = {...paramsURL};
+        const info = {...paramsURL};
         delete info.path;
 
         if(genres){

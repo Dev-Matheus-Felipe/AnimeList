@@ -6,6 +6,14 @@ import Loading from '../components/loading/loading';
 import { BackEnd } from '../lib/backend';
 import './minhalista.css';
 
+interface Anime {
+    title: string;
+    score: number;
+    image: string;
+    synopsis: string;
+    generos: string;
+}
+
 interface Status{
     loading : boolean,
     nome: string
@@ -42,7 +50,7 @@ export default function MinhaLista() {
 
     // ----------- || ----------- //
     
-    const mostrarAnime = (e: any): void => {
+    const mostrarAnime = (e: Anime): void => {
         const title = encodeURIComponent(e.title);
         const generos: string[] = e.generos.split(",");
 
@@ -89,7 +97,7 @@ export default function MinhaLista() {
                         {lista.length === 0 ? (
                             <p>Nenhum anime encontrado</p>
                         ) : (
-                            lista.map((e: any, index: number) => (
+                            lista.map((e: Anime, index: number) => (
                                 <div
                                     key={`${e.title}-${index}`}
                                     className='anime_single_lista'

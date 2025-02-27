@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
+
 'use client'
 
 interface Backend{
@@ -27,6 +30,7 @@ export async function BackEnd(backend : Backend){
         const body = JSON.stringify(backend.obj);
         BaseParametos = {...BaseParametos, body: body}
     }
-    const response = await fetch(`http://localhost:8080/${backend.path}`, BaseParametos)
+    const response = await fetch(`http://localhost:8080/${backend.path}`, BaseParametos) 
+
     return response;
 }

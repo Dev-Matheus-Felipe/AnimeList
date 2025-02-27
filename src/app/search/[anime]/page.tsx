@@ -2,7 +2,7 @@
 
     import { Ianime } from "@/app/components/anime_single/anime";
     import { usePathname, useRouter, useSearchParams } from "next/navigation";
-    import { useEffect, useState, useReducer } from "react";
+    import { useEffect, useState } from "react";
     import { fetchAnimes } from "@/app/lib/api"
     import styles from './search.module.css';
 
