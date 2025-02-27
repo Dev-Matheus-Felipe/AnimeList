@@ -30,7 +30,7 @@ export async function BackEnd(backend : Backend){
         const body = JSON.stringify(backend.obj);
         BaseParametos = {...BaseParametos, body: body}
     }
-    const response = await fetch(`http://localhost:8080/${backend.path}`, BaseParametos) 
+    const response = await fetch(`https://spring-boot-api-production-f919.up.railway.app/${backend.path}`, BaseParametos) 
 
     return response;
 }
