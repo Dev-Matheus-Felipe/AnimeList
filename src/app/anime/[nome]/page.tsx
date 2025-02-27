@@ -1,6 +1,7 @@
 'use client'
 
 import { useRouter, useSearchParams } from "next/navigation";
+import { BackEnd } from "@/app/lib/backend";
 import './anime_unico.css'
 
 export default function Nome(){
@@ -24,6 +25,7 @@ export default function Nome(){
 
     const genres = searchParams.get('genres') ? searchParams.get('genres')?.split(',') : [];
 
+
     // ----------- || ----------- //
 
     const voltarPagina = (): void =>{
@@ -35,7 +37,29 @@ export default function Nome(){
         } else if (paramsURL.page) {
             router.push(`${paramsURL.path}?page=${paramsURL.page}`);
         } else { router.push(`${paramsURL.path}`) }
+
     }
+
+    // ----------- || ----------- //
+
+    const changeAnime = async(id : number): Promise<void> =>{
+        let animes;
+        let info = {...paramsURL};
+        delete info.path;
+
+        if(genres){
+            const stringGeneros = genres.join(",");
+            const objGeneros = {generos: stringGeneros};
+            animes = {...objGeneros,...info};
+        }
+
+        const metodo = (id == 1) ? 'POST' : 'DELETE';
+        const response = await BackEnd({method: metodo, path: 'animes', obj: animes})
+        const result = await response.json();   
+
+        alert(result.message);
+    }
+
 
     return(
         <div className="A_flex">
@@ -60,6 +84,12 @@ export default function Nome(){
             
             <div className="button">
                 <button className="voltar_router" onClick={()=>voltarPagina()}>Voltar</button>
+                {
+                    (paramsURL.path == '/minha-lista')
+                    ? <button className="voltar_router" onClick={()=>changeAnime(0)}>Remover</button>
+                    : <button className="voltar_router" onClick={()=>changeAnime(1)}>Adicionar +</button>
+                    
+                }
             </div>
         </div>
     )

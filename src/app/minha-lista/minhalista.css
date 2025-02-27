@@ -1,0 +1,66 @@
+.minha_lista{
+    width: 100%;
+    height: auto;
+    text-align: center
+}
+
+.minha_lista > h1{
+    margin: 50px 0;
+    font-size: 25px;
+}
+
+.minha_lista > h1 > span{
+    color: blueviolet!important;
+}
+
+.lista_favoritos{
+    padding: 2%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-flow: row wrap;
+    
+}
+
+.anime_single_lista {
+    margin: 0 15px;
+    width: 180px;
+    height: 280px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    text-align: center;
+    background-color: #292929;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+    padding: 10px;
+    border-radius: 8px;
+    transition: transform 0.2s ease;
+    cursor: pointer;
+}
+
+.anime_single_lista:hover {
+    transform: scale(1.05); /* Efeito hover */
+}
+
+.anime_single_lista h3 {
+    margin: 10px 0;
+    font-size: 14px;
+    color: white;
+    word-break: break-word; /* Evita que o texto estoure o card */
+}
+
+.anime_single_lista img {
+    width: 100%;
+    height: 70%;
+    object-fit: cover; /* Garante que a imagem se encaixe bem */
+    border-radius: 5px;
+}
+
+.nota_anime_single_lista p {
+    margin: 0;
+    font-size: 14px;
+    color: gold;
+    font-weight: bold;
+}
+

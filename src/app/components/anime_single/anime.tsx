@@ -43,6 +43,8 @@ export function Anime( {anime}: {anime: Ianime[]}){
         
     }
 
+    // ----------- || ----------- //
+
     return(
         <>
             {

@@ -1,11 +1,10 @@
 'use client'
 
-import { Ianime } from "@/app/components/anime_single/anime";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { Ianime } from "@/app/components/anime_single/anime";
+import styles from '../../search/[anime]/search.module.css';
 import { useEffect, useState } from "react";
 import { fetchAnimes } from "@/app/lib/api"
-import styles from '../../search/[anime]/search.module.css';
-
 
 export default function Search(){
 
@@ -27,21 +26,23 @@ export default function Search(){
   
     // ----------- || ----------- //
 
-    const animes_API = async() : Promise<void> => {
-        router.push(`${pathname}?genres=${genres}&page=${page}`)
-        const cache = sessionStorage.getItem(`generos-${page}`);
-
-        if(cache){
+    const animes_API = async(): Promise<void> => {
+        router.push(`${pathname}?genres=${genres}&page=${page}`);
+        const cacheKey = `generos-${genres}-${page}`; // Usando genres e page na chave para diferenciar
+        const cache = sessionStorage.getItem(cacheKey);
+    
+        if (cache) {
             setSearch(JSON.parse(cache));
             setLoading(false);
-        }else{
-            const animes = await fetchAnimes({page: page, movie: false, genero: genres});
-            sessionStorage.setItem(`generos-${page}`, JSON.stringify(animes));
+        } else {
+            const animes = await fetchAnimes({ page: page, movie: false, genero: genres });
+            sessionStorage.setItem(cacheKey, JSON.stringify(animes));
             setSearch(animes);
             setLoading(false);
         }
-        
     }
+    
+    // ----------- || ----------- //
 
     const mover = (number: number) : void => {
         if(number == 0){
@@ -56,6 +57,8 @@ export default function Search(){
             } 
         }
     }
+
+    // ----------- || ----------- //
 
     const mostrarAnime = (e: Ianime) : void => {
         const title = encodeURIComponent(e.title);
@@ -90,6 +93,8 @@ export default function Search(){
         avancar.style.visibility = ( search.length < 20 ) ? 'hidden' : 'visible';  
 
     }, [search]);
+
+    // ----------- || ----------- //
 
     return (
         <div className={styles.flex}>
@@ -130,6 +135,5 @@ export default function Search(){
                 </div>
             </div>
         </div>
-    );
-    
+    );   
 }

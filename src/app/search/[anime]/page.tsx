@@ -2,24 +2,25 @@
 
     import { Ianime } from "@/app/components/anime_single/anime";
     import { usePathname, useRouter, useSearchParams } from "next/navigation";
-    import { useEffect, useState } from "react";
+    import { useEffect, useState, useReducer } from "react";
     import { fetchAnimes } from "@/app/lib/api"
     import styles from './search.module.css';
+
   
     export default function Search(){
         
         // ----------- || ----------- //
 
         const searchParams = useSearchParams();
+        const pathname = usePathname();
+        const router = useRouter();
+
         const page_number = Number(searchParams.get('page'));
 
         const [search,setSearch] = useState<Ianime[]>([]);
-
         const [page,setPage] = useState<number>(page_number);
         const [loading,setLoading] = useState<boolean>(true);
-        const pathname = usePathname();
-        const router = useRouter();
-        
+
         const filtro = pathname.split('/');
         const texto = decodeURIComponent(filtro[2].split('-').join(' '));
 
@@ -93,6 +94,8 @@
                 animes_API();
             }
         },[page])
+
+        // ----------- || ----------- //
 
         return (
             <div className={styles.flex}>

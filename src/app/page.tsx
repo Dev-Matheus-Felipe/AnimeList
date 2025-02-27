@@ -10,10 +10,11 @@ export default function Home() {
 
   // ----------- || ----------- //
 
-  const generos: number[] = [2, 22, 35, 40];
+  const generos: number[] = [2, 22, 9, 40];
   const [listasAnimes, setListasAnimes] = useState<Ianime[][]>([]); 
 
   // ----------- || ----------- //
+
 
   useEffect(() => {
     async function loadAnimes() {
@@ -37,6 +38,8 @@ export default function Home() {
 
     loadAnimes();
   }, []);
+
+  // ----------- || ----------- //
 
   return (
     <>

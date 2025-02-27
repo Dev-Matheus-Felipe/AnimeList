@@ -1,9 +1,9 @@
 'use client'
 
-import { useState } from 'react'
-import './generos.css'
 import { Ageneros, ListaGeneros } from './generos'
 import { useRouter } from 'next/navigation'
+import { useState } from 'react'
+import './generos.css'
 
 export default function Generos(){
 
@@ -47,6 +47,8 @@ export default function Generos(){
 
         
     }
+
+    // ----------- || ----------- //
 
     return(
         <>

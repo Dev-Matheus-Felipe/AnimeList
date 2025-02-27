@@ -3,7 +3,6 @@ export interface Ageneros{
     index: number
 }
 
-
 export function ListaGeneros(): Ageneros[]{
     const generos: Ageneros[] = [
         { name: "Ação", index: 1 }, 

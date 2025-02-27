@@ -95,6 +95,7 @@
     cursor: pointer;
     transition: all 0.3s ease;
     margin-bottom: 50px;
+    margin-right: 20px;
 }
 
 .voltar_router:hover {

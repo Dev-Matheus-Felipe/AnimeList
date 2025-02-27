@@ -1,7 +1,7 @@
 'use client'
 
-import { Suspense, useEffect, useState } from 'react';
 import { Anime, Ianime } from '../components/anime_single/anime';
+import { Suspense, useEffect, useState } from 'react';
 import { Button } from '../components/buttons/Button';
 import { fetchAnimes } from '../lib/api'
 import './filmes.css'
@@ -37,6 +37,8 @@ export default  function Filmes(){
 
     loadAnimes();
   }, []);
+
+  // ----------- || ----------- //
 
   return(
       <>
@@ -83,7 +85,7 @@ export default  function Filmes(){
 
             
             
-            
+      
           <div className="romance">
             <h3>Super Poderes</h3>
   
