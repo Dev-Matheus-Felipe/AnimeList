@@ -1,0 +1,8 @@
+.animes{
+    width: 100%;
+    height: 1300px;
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: space-between;
+
+}

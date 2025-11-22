@@ -1,0 +1,56 @@
+.anime_single{
+
+    width: 140px;
+    height: 180px;  
+    background-position: center;
+    background-size: cover;
+    border-radius: 7px;
+    cursor: pointer;
+    position: relative;
+    transition: .5s;
+    overflow: hidden;
+}
+
+.anime_single::before{
+    content: var(--title);
+    width: 100%;
+    height: 120%;
+    display: flex;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    font-size: 12px;
+    position: absolute;
+    top:  0%;
+    left: 0%;
+    transition: .5s;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    z-index: 3;
+    text-align: center;
+   
+}
+
+.anime_single:hover{
+    box-shadow: 0 0 13px 1px white;
+    transform: scale(1.1);
+}
+
+.anime_single::after{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 110%;
+    height: 110%;
+    z-index: 2;
+    transition: .5s;
+}
+
+.anime_single:hover.anime_single::before{
+    height: 90%;
+}
+.anime_single:hover.anime_single::after{
+    background-color: rgba(0,0,0,0.3);
+}
