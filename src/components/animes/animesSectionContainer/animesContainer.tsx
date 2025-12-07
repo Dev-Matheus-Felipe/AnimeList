@@ -8,35 +8,24 @@ export default async function AnimesContainer({type} : {type: "tv" | "movie"}){
 
     // gets the initial data for the page
 
-    const genres: GenresData[] = genresData.slice(0,2);
+    const genre: GenresData = genresData[0];
 
-    const animePromises: Promise<AnimeData[]>[] = genres.map( async (genre: GenresData) => {
-        const animeParams: AnimeParams = {
-            type: type,
-            page: 1,
-            limit: 10,
-            genres: [genre.id]
-        };
-        
-        return await fetchAnimes({ animeParams });
-    });
-
+    const animeParams: AnimeParams = {
+        type: type,
+        page: 1,
+        limit: 10,
+        genres: [genre.id]
+    };
+    
     // saves the initial data
 
-    const animes: AnimeData[][] = await Promise.all(animePromises);
+    const animes: AnimeData[] = await fetchAnimes({animeParams});
 
     return (
         <div className={style.animes}>
+            <AnimeSection info={{ title: genre.label, animes: animes, type: type, genre: genre.id }} /> 
 
-            {
-               animes && animes.map((e: AnimeData[], index: number) => (
-                    <AnimeSection 
-                        key={index} 
-                        info={{ title: genres[index].label, animes: e, type: type, genre: genres[index].id }} /> 
-                ))
-            }
-
-            <ControlerLoading type={type} startIndex={2} />
+            <ControlerLoading type={type} startIndex={1} />
         </div>
     )
 }
