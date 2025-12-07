@@ -8,46 +8,61 @@ import { genresData } from "@/lib/dataAnimes";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 
-let page = 3;
+interface LoadedAnime {
+    title: string;
+    animes: AnimeData[];
+}
 
-export default function ControlerLoading({type} : {type: "tv" | "movie"}){
-    const [animes, setAnimes] = useState<{title: string, animes: AnimeData[]}[]>([]);
+export default function ControlerLoading({ type, startIndex }: { type: "tv" | "movie", startIndex: number }) {
+    const [loadedAnimes, setLoadedAnimes] = useState<LoadedAnime[]>([]);
+    const [currentIndex, setCurrentIndex] = useState(startIndex);
 
-    const {ref, inView} = useInView();
-    const data = genresData;
+    const { ref, inView } = useInView();
 
-    useEffect(()=> {
-        if(inView){
+    useEffect(() => {
+        if (inView && currentIndex < genresData.length) {
+            const genre = genresData[currentIndex];
+
             const animeParams: AnimeParams = {
-                type: type,
+                type,
                 page: 1,
                 limit: 10,
-                genres: [data[page].id],
+                genres: [genre.id],
             };
-            
-            fetchAnimes({ animeParams }).then((res : AnimeData[]) => {
-                setAnimes( prev => (
-                    [...prev, {title: data[page].genre, animes: res}]
-                ))
 
-                page++;
+            fetchAnimes({ animeParams }).then((res: AnimeData[]) => {
+                setLoadedAnimes(prev => [...prev, { title: genre.label, animes: res ?? [] }]);
+                setCurrentIndex(prev => prev + 1);
             });
         }
-    },[inView])
+    }, [inView, currentIndex, type]);
 
-    return(
+    return (
         <>
-            {
-                animes && animes.map((e: {title: string; animes: AnimeData[]}, index: number) => (
-                    <AnimeSection 
-                        key={index} 
-                        info={{title: data[index + 3].genre, animes: e.animes, type: type, genre: data[index +3].id}} />
-                ))
-            }
+           {
+                loadedAnimes.map((section: LoadedAnime, i: number) => {
+                    const genre = genresData[startIndex + i];
+                    if (!genre) return null;
 
-            <div className={styles.loadMore} ref={ref}>
-                <Image src="/icons/general/loadingMore.svg" alt="Loading" width={40} height={40}/>
-            </div>
+                    return (
+                        <AnimeSection
+                            key={i}
+                            info={{
+                                title: section.title,
+                                animes: section.animes ?? [],
+                                type,
+                                genre: genre.id
+                            }}
+                        />
+                    )
+                })
+           }
+
+            {currentIndex < genresData.length && (
+                <div className={styles.loadMore} ref={ref}>
+                    <Image src="/icons/general/loadingMore.svg" alt="Loading" width={40} height={40} />
+                </div>
+            )}
         </>
-    )
+    );
 }

@@ -8,7 +8,7 @@ export default async function AnimesContainer({type} : {type: "tv" | "movie"}){
 
     // gets the initial data for the page
 
-    const genres: GenresData[] = genresData.slice(0,3);
+    const genres: GenresData[] = genresData.slice(0,2);
 
     const animePromises: Promise<AnimeData[]>[] = genres.map( async (genre: GenresData) => {
         const animeParams: AnimeParams = {
@@ -36,7 +36,7 @@ export default async function AnimesContainer({type} : {type: "tv" | "movie"}){
                 ))
             }
 
-            <ControlerLoading type={type} />
+            <ControlerLoading type={type} startIndex={2} />
         </div>
     )
 }

@@ -17,7 +17,6 @@ export default function Genres(){
     const [animes, setAnimes] = useState<AnimeData[]>([]);
     const [getMore, setGetMore] = useState<boolean>(false);
     const [config, setConfig] = useState<boolean>(false);
-    const [loading, setLoading] = useState<boolean>(false);
 
     const modalVersion = useRef<HTMLDivElement | null>(null);
     
@@ -70,15 +69,6 @@ export default function Genres(){
     }, [pathname]);
 
 
-    // loading control
-
-    useEffect(() => {
-        setLoading(() => {
-            return (animes.length === 0) ? true : false;
-        })
-    },[animes])
-
-
     // gets more animes beaseded on the scroll
 
     useEffect(()=>{
@@ -92,82 +82,72 @@ export default function Genres(){
 
     return (
         <> 
-            {
-                (loading) 
-                    ?   <div className={styles.loadMore}>
-                            <Image src="/icons/general/loadingMore.svg" alt="Loading" width={40} height={40}/>
-                        </div>
-                    :
-                
-                <>
-                    <div className={styles.desktop_genres}>
-                        <div className={styles.sidebar}>
-                            <p className={(actived?.id === 0) ? styles.desktop_actived : ""} onClick={()=>setActived({id: 0, page: 1})}>
-                                Bests
+            <div className={styles.desktop_genres}>
+                <div className={styles.sidebar}>
+                    <p className={(actived?.id === 0) ? styles.desktop_actived : ""} onClick={()=>setActived({id: 0, page: 1})}>
+                        Bests
+                    </p>
+                    
+                    {
+                        genresData && genresData.map((e: GenresData) => (
+                            <p 
+                                key={e.id} 
+                                onClick={() =>setActived({id: e.id, page: 1}) }
+                                className={(actived?.id === e.id) ? styles.desktop_actived : ""}>
+                                {e.genre}
                             </p>
-                            
-                            {
-                                genresData && genresData.map((e: GenresData) => (
-                                    <p 
-                                        key={e.id} 
-                                        onClick={() =>setActived({id: e.id, page: 1}) }
-                                        className={(actived?.id === e.id) ? styles.desktop_actived : ""}>
-                                        {e.genre}
-                                    </p>
-                                ))
-                            }
-                        </div>
+                        ))
+                    }
+                </div>
 
-                        <div className={styles.desktop_genres_animes}>
+                <div className={styles.desktop_genres_animes}>
 
-                            { animes && animes.map((e: AnimeData,index: number)=>(
-                                <Anime key={index} info={{anime: e, width: "150px", height: "220px"}}/> )) }
+                    { animes && animes.map((e: AnimeData,index: number)=>(
+                        <Anime key={index} info={{anime: e, width: "150px", height: "220px"}}/> )) }
 
-                            <div className={styles.loadMore} ref={desktopRef} style={{display: (getMore) ? "block" : "none"}}>
-                                <Image src="/icons/general/loadingMore.svg" alt="Loading" width={40} height={40}/>
+                    <div className={styles.loadMore} ref={desktopRef} style={{display: (getMore) ? "block" : "none"}}>
+                        <Image src="/icons/general/loadingMore.svg" alt="Loading" width={40} height={40}/>
+                    </div>
+                </div>
+
+                <div className={styles.desktop_genres_config}>
+                    <button className={styles.genres_config_icon} onClick={()=> setConfig(true)} />
+                </div>
+            </div>
+
+            <div className={styles.mobile_genres} ref={modalVersion}>
+                
+                { (actived === undefined)
+                    ? 
+                        <>
+                            <p onClick={()=>setActived({id: 0, page: 1})}>Bests</p>
+
+                            { genresData && genresData.map((e)=>(
+                                <p 
+                                    key={e.id} 
+                                    onClick={() => setActived({id: e.id, page: 1})}>{e.genre}</p> )) }
+                        </>
+
+                    :  
+                        <>
+                            <div className={styles.mobile_genres_animes}>
+                                { animes && animes.map((e : AnimeData, index : number)=>(
+                                    <Anime key={index} info={{anime: e, width: "150px", height: "220px"}} /> )) }
+
+                                <div className={styles.loadMore} ref={mobileRef} style={{display: (getMore) ? "block" : "none"}}>
+                                    <Image src="/icons/general/loadingMore.svg" alt="Loading" width={40} height={40} />
+                                </div>
                             </div>
-                        </div>
 
-                        <div className={styles.desktop_genres_config}>
-                            <button className={styles.genres_config_icon} onClick={()=> setConfig(true)} />
-                        </div>
-                    </div>
+                            <div className={styles.mobile_genres_config}>
+                                <button className={styles.genres_back_icon} onClick={() => setActived(undefined)} />
+                                <button className={styles.genres_config_icon} onClick={()=> setConfig(true)} />
+                            </div>
+                        </>
+                }
+            </div>
 
-                    <div className={styles.mobile_genres} ref={modalVersion}>
-                        
-                        { (actived === undefined)
-                            ? 
-                                <>
-                                    <p onClick={()=>setActived({id: 0, page: 1})}>Bests</p>
-
-                                    { genresData && genresData.map((e)=>(
-                                        <p 
-                                            key={e.id} 
-                                            onClick={() => setActived({id: e.id, page: 1})}>{e.genre}</p> )) }
-                                </>
-
-                            :  
-                                <>
-                                    <div className={styles.mobile_genres_animes}>
-                                        { animes && animes.map((e : AnimeData, index : number)=>(
-                                            <Anime key={index} info={{anime: e, width: "150px", height: "220px"}} /> )) }
-
-                                        <div className={styles.loadMore} ref={mobileRef} style={{display: (getMore) ? "block" : "none"}}>
-                                            <Image src="/icons/general/loadingMore.svg" alt="Loading" width={40} height={40} />
-                                        </div>
-                                    </div>
-
-                                    <div className={styles.mobile_genres_config}>
-                                        <button className={styles.genres_back_icon} onClick={() => setActived(undefined)} />
-                                        <button className={styles.genres_config_icon} onClick={()=> setConfig(true)} />
-                                    </div>
-                                </>
-                        }
-                    </div>
-
-                    <AdvancedSearch config={config} setConfig={setConfig} params={{page: 1, type: "tv", limit: 25}} />
-                </>
-            }
+            <AdvancedSearch config={config} setConfig={setConfig} params={{page: 1, type: "tv", limit: 25}} />
         </>
     )
 }

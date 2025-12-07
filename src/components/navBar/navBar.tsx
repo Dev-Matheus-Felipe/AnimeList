@@ -113,8 +113,8 @@ export function NavBar(){
                         <Image 
                             src={e.icon} 
                             alt={e.name + " Icon"} 
-                            width={30} 
-                            height={30}
+                            width={27} 
+                            height={27}
                             className={`${styles.mobile_navbar_image} ${(pathName === e.pathname) && styles.mobile_actived}`} />
                         <p style={{display: (pathName === e.pathname) ? "block" :"none"}}>{e.name}</p>
                     </Link>
