@@ -7,7 +7,7 @@ export const homeBanner: AnimeData[] = [
     synopsis: "Beyond Journey's End is about an elven mage named Frieren who, after her party of heroes defeats the Demon King, struggles to understand the human concept of time and mortality. She realizes she has a limited time to connect with her aging comrades and embarks on a new journey with an apprentice, Fern, and a warrior, Stark. As they travel the land they once saved, Frieren reflects on her past adventures, confronts her regrets, and seeks to understand the bonds she shared with her former party. ",
     score: 9.29,
     large_image: "/banners/home/mobile/modals/frierenModal.webp",
-    banner_desktop_image: "/banners/home/homeBanner.webp",
+    banner_desktop_image: "/banners/home/homebanner.webp",
     banner_mobile_image: "/banners/home/mobile/frieren.jpg",
     image: ""
   },
