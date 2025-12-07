@@ -1,13 +1,12 @@
-"use server"
+"use cache"
 
 export type AnimeParams = {
     page: number;
-    type: "tv" | "movie" | "ova";
+    type: "tv" | "movie";
     limit: number;
     search?: string;
     genres?: number[];
     min_score?: number;
-    status?: "airing" | "complete" | "upcoming";
 }
 
 export type AnimeData = {
@@ -16,10 +15,12 @@ export type AnimeData = {
     image: string,
     large_image: string,
     synopsis: string,
-    genres: string[]
+    genres: string[],
+    banner_desktop_image? : string,
+    banner_mobile_image? : string
 }
 
-type ApiAnime = {
+export type ApiAnime = {
     title: string;
     score: number;
     synopsis: string;
@@ -46,14 +47,12 @@ export async function fetchAnimes({animeParams}: {animeParams : AnimeParams}): P
     if(animeParams.min_score)
         baseUrl += `&min_score=${animeParams.min_score}`;
 
-    if(animeParams.status)
-        baseUrl += `&status=${animeParams.status}`;
     
     const response: Response = await fetch(baseUrl, { cache: 'force-cache', });
-    const data = await response.json().then(res => res.data);
+    const data = await response.json().then(res => res.data).catch(() => []);
 
     if(data)
-        data.map((e : ApiAnime) => {
+        data.map((e: ApiAnime) => {
             const generos_list : string[] = [];
 
             e.genres.map((i: { name: string }) => {

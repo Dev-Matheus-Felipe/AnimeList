@@ -1,0 +1,246 @@
+/* -------------------------------------------- GENRES -------------------------------------------- */
+
+.loadMore, .mobileLoadMore{
+  width: 100%;
+  text-align: center;
+  height: 100px;
+  padding: 50px 0;
+}
+
+.mobileLoadMore{
+  width: 100%;
+  text-align: center;
+  height: 100px;
+  padding: 20px 0;
+}
+
+.desktop_actived, .mobile_actived{
+    color: var(--secondary-color)!important;
+    background-color: var(--navBar-desktop-actived);
+    font-weight: bold!important;
+}
+
+
+/* -------------------------------------------- DESKTOP GENRES -------------------------------------------- */
+
+.desktop_genres{
+    display: flex;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.desktop_genres_config{
+  width: auto;
+  height: 30px;
+  z-index: 7;
+  position: fixed;
+  top: 95%;
+  left: 100%;
+  transform: translate(-95%,-100%);
+  display: flex;
+  flex-flow: row-reverse wrap;
+  justify-content: space-between;
+  padding: 0 5%;
+}
+
+.genres_config_icon{
+  background-image: url("/icons/general/config.svg"); 
+  width: 40px; 
+  height: 40px; 
+  cursor: pointer;
+}
+
+
+/* ------------------- SIDEBAR ------------------- */
+
+.sidebar{
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding: 50px 0 10px 30px;
+}
+
+
+.sidebar p{
+    width:  95%;
+    text-align: center;
+    padding: 15px 15px;
+    font-size: 13px;
+    border-radius: 7px;
+    cursor: pointer; 
+    border: 1px solid transparent;
+}
+
+.sidebar p:hover{ border-color:  var(--navBar-desktop-actived); }
+  
+
+/* ------------------- GENRES CONTAINER ------------------- */
+
+.desktop_genres_animes{
+    max-width: 80%;
+    display: flex;
+    margin: 0 auto;
+    margin-top: 30px;
+    flex-flow: row wrap;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 20px;
+    padding-left: 40px;
+    border-left: 1px solid var(--primary-color);
+}
+
+
+/* -------------------------------------------- MOBILE GENRES -------------------------------------------- */
+
+.mobile_genres{
+  width: 100%;
+  display: none;
+  flex-flow: row wrap;
+  padding: 2%;
+  margin:  20px 0 100px 0;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.mobile_genres p{
+  padding: 10px 20px;
+  border: 1px solid #ccc;
+}
+
+
+.mobile_genres_animes{
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  width: auto;
+  gap: 5px;
+}
+
+
+/* ------------------- BUTTONS ------------------- */
+
+.genres_config_icon, .genres_back_icon{
+  background-size: cover;
+  width: 35px;
+  height: 35px;
+  border: 0;
+  border-radius: 50%;
+  border: 3px solid black;
+  background-color: white;
+
+}
+
+.mobile_genres_config{
+  width: 100%;
+  height: 30px;
+  z-index: 7;
+  position: fixed;
+  top: 85%;
+  left: 0;
+  display: flex;
+  flex-flow: row-reverse wrap;
+  justify-content: space-between;
+  padding: 0 5%;
+}
+
+.genres_config_icon{ background-image: url("/icons/general/config.svg"); }
+.genres_back_icon{ background-image: url("/icons/general/left.svg"); }
+
+
+/* -------------------------------------------- MEDIA SCREENS -------------------------------------------- */
+
+
+@media screen and (max-width: 1100px){
+  .sidebar { width: 150px; } 
+  .sidebar > p{
+        width:  90%!important;
+        padding: 12px 12px;
+        font-size: 12px;
+      
+    }
+}
+
+
+@media screen and (max-width: 730px){
+  .mobile_genres{ display: flex; }
+
+  .desktop_genres{ display: none; }
+
+  .mobile_genres_animes .anime_single {
+    min-width: 140px!important;
+    height: 200px!important;
+  }
+
+  .mobile_genres_animes{
+    gap: 20px;
+  }
+
+  .mobile_genres_config{
+    flex-direction: row;
+  }
+}
+
+@media screen and (max-width: 535px){
+  .sidebar{ line-height: 20px; }
+  .sidebar > p{
+    font-size: 11px;
+    padding: 9px;
+  }
+
+  :global(.anime) {
+    min-width: 100px!important;
+    height: 150px!important;
+  }
+}
+
+
+
+@media screen and (max-width: 481px){
+  .mobile_genres{ display: flex; }
+
+  .desktop_genres{ display: none; }
+
+  
+  .mobile_genres_animes .anime_single {
+    min-width: 100px!important;
+    height: 140px!important;
+  }
+}
+
+@media screen and (max-width: 354px){ .mobile_genres_animes{ gap: 0; } }
+
+@media screen and (max-width: 314px){
+  .mobile_genres_animes{ gap: 20px; }
+  .mobile_genres_animes .anime_single {
+      min-width: 130px!important;
+      height: 180px!important;
+    }
+}
+
+
+/*---------------------- */
+
+.sideBar ::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track (fundo) */
+.sideBar ::-webkit-scrollbar-track {
+  background: transparent; /* cor do fundo */
+  border-radius: 10px;
+}
+
+/* Thumb (parte que se move) */
+.sideBar ::-webkit-scrollbar-thumb {
+  background: #555;      /* cor da barra */
+  border-radius: 10px;   /* cantos arredondados */
+  border: 3px solid #1e1e1e; /* deixa ela mais fininha */
+}
+
+/* Thumb ao passar o mouse */
+.sideBar ::-webkit-scrollbar-thumb:hover {
+  background:transparent;
+}

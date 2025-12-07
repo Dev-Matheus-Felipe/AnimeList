@@ -1,0 +1,45 @@
+/* -------------------------------------------- SECTION LOADING -------------------------------------------- */
+
+.sectionLoading{
+    margin: 20px auto;
+    width: 95%;
+    height: 250px;
+    padding: 1% 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+
+/* ------------------- TITLE CONTAINER ------------------- */
+
+.title_container{
+    width: 93%;
+    height: 30px;   
+}
+
+.title{
+    width: 200px;
+    height: 100%;
+    background-color: #2e2e2e66;
+}
+
+
+/* ------------------- ANIMES CONTAINER ------------------- */
+
+.animes{
+    height: 83%;
+    width: 93%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 20px;
+}
+
+.anime{
+    width: 120px;
+    height: 140px;
+    background-color: #2e2e2e81;
+}

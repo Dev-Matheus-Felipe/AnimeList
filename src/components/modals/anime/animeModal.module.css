@@ -1,0 +1,290 @@
+/* -------------------------------------------- MODAL -------------------------------------------- */
+
+.blur{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.4);
+    z-index: 11;
+    backdrop-filter: blur(3px);
+    display: flex;
+    flex-flow: row  wrap;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.modal{
+    z-index: 999;
+    width: 1100px;
+    min-height: 560px;
+    background-color: var(--animeModal-background);
+    position: relative;
+    border-radius: 10px;
+    margin: 2%;
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    box-shadow: 0 0 6px black;
+}
+
+.modal .close{
+    background-image: var(--modal-close);
+    width: 35px;
+    height: 35px;
+    background-color: transparent;
+    border: 0;
+    border-radius: 50%;
+    position: absolute;
+    top: 2%;
+    left: 99%;
+    transform: translate(-99%,-2%);
+    cursor: pointer;
+    transition: .5s;
+}
+
+.modal .close:hover{ transform: scale(1.1) translate(-90%, 0); }
+
+
+/* ------------------- IMAGE CONTAINER ------------------- */
+
+.image_container{
+    width: 400px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.image{
+    width: 80%;
+    height: 80%;
+    border-radius: 10px;
+    box-shadow: 0 0 10px black;
+}
+
+
+/* ------------------- DESCRIPTION ------------------- */
+
+.description{
+    width: calc(100% - 450px);
+    height: 450px;
+}
+
+
+/* ------------------- TITLE CONTAINER ------------------- */
+
+.title_container{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    font-size: 20px;
+    height: auto;
+    padding: 1% 5% 1% 0;
+}
+
+.title_container p{
+    color: var(--primary-color);
+    font-size: 27px;
+}
+
+.title_container span{
+    text-shadow: 0 0 2px black;
+    margin-left: 10px;
+    color: gold;
+    width: 100%;
+    font-size: 16px;
+}
+
+
+/* ------------------- GENRES CONTAINER ------------------- */
+
+.genres_container{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin: 10px 0;
+}
+
+.genres_container p{
+    border: 2px solid var(--primary-color);
+    border-radius: 10%;
+    padding: 5px 10px;
+    font-size: 14px;
+    color: var(--primary-color);
+}
+
+
+/* ------------------- SYNOPSIS CONTAINER ------------------- */
+
+.synopsis_container{
+    width: 100%;
+    margin: 3% 0;
+    max-height: 250px;
+    overflow-y: auto;
+}
+
+.synopsis_container p{
+    padding: 1%;
+    width: calc(100% - 50px);
+    font-size: 15px;
+    border-bottom: 1px solid var(--primary-color);
+    font-weight: 300;
+    line-height: 30px;
+    color: var(--primary-color);
+}
+
+/* Largura da barra de rolagem */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track (fundo) */
+::-webkit-scrollbar-track {
+  background: #1e1e1e; /* cor do fundo */
+  border-radius: 10px;
+}
+
+/* Thumb (parte que se move) */
+::-webkit-scrollbar-thumb {
+  background: #555;      /* cor da barra */
+  border-radius: 10px;   /* cantos arredondados */
+  border: 2px solid #1e1e1e; /* deixa ela mais fininha */
+}
+
+/* Thumb ao passar o mouse */
+::-webkit-scrollbar-thumb:hover {
+  background: #888;
+}
+
+
+/* -------------------------------------------- MEDIA SCREENS -------------------------------------------- */
+
+@media screen and (max-width: 870px){
+    .image_container{
+        width: 300px;
+        height: 100%;
+    }
+
+    .image_container .image{ width: 92%; }
+
+    /* -- */
+
+    .description{
+        width: 60%;
+        height: 400px;
+    }
+
+    /* -- */
+
+    .title_container{ padding-left: 20px; }
+
+    .title_container p{
+        width: auto;
+        font-size: 18px;
+    }
+
+    /* -- */
+
+    .genres_container{
+        flex-flow: row wrap;
+        gap: 20px;
+        padding: 0 2%;
+        min-height: auto;
+    }
+
+    .genres_container p{
+        padding: 2% 2%;
+        font-size: 11px;
+    }
+
+    /* -- */
+
+    .synopsis_container{
+        width: 95%;
+        max-height: 200px;
+    }
+
+    .synopsis_container p{
+        height: auto;
+        width: 100%;
+        padding: 2%;
+        font-size: 14px;
+    }
+}
+
+
+@media screen and (max-width: 785px){
+    .modal{
+        justify-content: space-around;
+        min-height: 520px;
+    }
+
+    /* -- */
+
+    .image_container{
+        width: 250px;
+        height: 100%;
+    }
+
+    .image_container .image{ width: 90%; }
+
+    /* -- */
+
+    .description{  height: 360px; }
+}
+
+
+@media screen and (max-width: 652px){
+    .modal{
+        width: 100%;
+        min-height: 100%;     
+        border-radius: 0;
+        margin: 0;
+        align-items: flex-start;
+        flex-direction: column;  
+        justify-content: flex-start;
+        align-items: center;
+    }
+
+    /* -- */
+
+    .image_container{
+        width: 280px;          
+        height: 380px;
+    }
+
+    /* -- */
+
+    .description{
+        width: 95%;            
+        height: auto;
+        display: flex;
+        flex-flow: column wrap;
+        justify-content: flex-start;
+    }
+
+    /* -- */
+
+    .title_container{
+        width: 95%;
+        padding-left: 10px;
+    }
+
+    /* -- */
+
+    .synopsis_container{
+        width: 100%;
+        max-height: 200px;
+        margin-bottom: 20px;
+    }
+
+    .synopsis_container p{
+        height: auto;
+        width: 100%;
+        padding: 2%;
+        font-size: 14px;
+    }
+}

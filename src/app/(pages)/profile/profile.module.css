@@ -1,0 +1,383 @@
+/* -------------------------------------------- PROFILE -------------------------------------------- */
+
+input::placeholder, textarea::placeholder{
+    color: var(--cc-black);
+}
+
+.profile{
+    height: 100%;
+    display: flex;
+    flex-flow: column wrap;
+    max-width: 1200px;
+    margin: 0 auto;
+    margin-top:  50px;
+    height: 100%;
+    padding: 2%;
+}
+
+.initial_title{
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--primary-color);
+    margin-bottom: 40px;
+    padding-bottom: 10px;
+}
+
+.initial_title > h1{
+    width: 100%;
+    font-size: 27px;
+}
+
+
+.profile_info{
+    display: flex;
+    flex-flow: row wrap;
+}
+
+
+/* ------------------- SIDEBAR ------------------- */
+
+.sidebar_1{
+    width: 50%;
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    padding-left: 100px;
+    gap: 20px;
+    padding: 1%;
+}
+
+
+.sidebar_1 > textarea{
+    resize: none;
+    max-width: 450px;
+    height: 80px;
+    display: flex;
+    align-items: flex-start;
+    border: 1px solid var(--filter-input-border);
+    background-color: transparent;
+    border-radius: 3px;
+    padding: 2%;
+    outline: none;
+    font-size: 13px;
+}
+
+
+.container_title{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.closeButton{ cursor: pointer; }
+
+
+/* ------------------- THEME ------------------- */
+
+.theme{
+    width: 70px;
+    height: 35px;
+    position: absolute;
+    top: 0%;
+    left: 100%;
+    transform: translate(-100%,0%);
+    background-color: transparent;
+    cursor: pointer;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.theme button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 3px;
+}
+
+.theme button:nth-of-type(2){ margin-top: 10px; }
+
+.theme span{
+    width: 15px;
+    height: 15px;
+    background-image: var(--arrow-up-down);
+    background-size: cover;
+}
+
+.theme button:hover span{ background-image: var(--arrow-up-down-reverse); }
+
+
+.theme_option{
+    width: 100%;
+    min-height: 35px;
+    background-color: transparent;
+    cursor: pointer;
+    border: 1px solid var(--filter-input-border);;
+}
+
+.theme_chosen{
+    gap: 10px;
+    width: 100%;
+    min-height: 35px;
+    background-color: transparent;
+    border: 1px solid var(--filter-input-border);;
+    border-bottom: 0;
+    border-bottom: 1px solid var(--filter-input-border);;
+    cursor: pointer;
+}
+
+.theme_option:hover, .theme_chosen:hover{
+    background-color: var(--navBar-desktop-actived);
+    color: var(--secondary-color);
+    border: 1px solid var(--navBar-desktop-actived);
+}
+
+/* ------------------- PERSONALIZATION ------------------- */
+
+.favAnime{ margin-top: 20px; }
+
+.personalization{
+    display: flex;
+    flex-flow: row wrap;
+    max-width: 450px;
+    justify-content: space-between;
+    align-items: flex-end;
+    position: relative;
+}
+
+.personalization input{
+    width: 200px;
+    height: 35px;
+    padding: 0 10px;
+    font-size: 13px;
+    border: 1px solid var(--filter-input-border);
+    background-color: transparent;
+    border-radius: 2px;
+}
+
+.favorite_anime_container{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+
+/* ------------------- SIDEBAR 2 ------------------- */
+
+
+.sidebar_2{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* ------------------- PICTURE ------------------- */
+
+.picture{
+    border: 1px solid black;
+    border-radius: 5px;
+    position: relative;
+    
+}
+
+.image_container{
+    position: relative;
+    width: 250px;
+    height: 250px;
+    cursor: pointer;
+}
+
+.image_container:hover.image_container::before{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0%;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.084);
+    z-index: 5;
+    backdrop-filter: blur(3px);
+}
+
+
+.image_container:hover.image_container::after{
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 30px;
+    height: 30px;
+    background-image: url("/icons/general/pencil.svg");
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 5;
+}
+
+
+
+.badge, .mobile_badge{
+    width: 250px;
+    margin-top: 20px;
+    color: var(--primary-color);;
+    font-style: italic;
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 4px;
+}
+
+.line_1, .line_2{
+    background-color: var(--primary-color);
+    height: 1px;
+    flex-grow: 1;
+    min-width: 0;  
+
+}
+
+.mobile_badge{
+    display: none;
+    width: 100%;
+}
+
+.badge p{ font-size: 15px; }
+
+/* ------------------- USER INFO ------------------- */
+
+
+.user_config_container{
+    height: 70px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+
+}
+
+.profile_settings{
+    margin-top: 70px;
+}
+
+.user_config{
+    width: 30%;
+    margin-top: 50px;
+    display: flex;
+    border-top: 1px solid var(--primary-color);
+    gap: 20px;
+    padding-top: 20px;
+
+}
+
+.nickname{
+    width: 200px;
+    height: 35px;
+    padding: 0 10px;
+    font-size: 12px;
+    border: 1px solid var(--filter-input-border);
+    background-color: transparent;
+    border-radius: 2px;
+    outline: none;
+}
+
+.age{
+    width: 60px;
+    height: 35px;
+    border: 1px solid var(--filter-input-border);
+    background-color: transparent;
+    outline: none;
+    display: flex;
+    padding-left: 12px;
+}
+
+.mobile_picture{
+    display: none;
+    width: 100px;
+    height: 100px;
+}
+
+
+.save{
+    width: 75px;
+    height: 35px;
+    cursor: pointer;
+    border: 1px solid var(--primary-color);
+    background-color: transparent;
+    color: var(--primary-color);
+    border-radius: 3px;
+    margin-top: 50px;
+}
+
+.save:hover{
+    background-color: var(--navBar-desktop-actived);
+    color: var(--secondary-color);
+    border: 0;
+}
+
+
+
+
+/* -------------------------------------------- MEDIA SCREENS -------------------------------------------- */
+
+@media screen and (max-width: 600px){
+    .sidebar_2{ display: none; }
+    .mobile_picture{ display: flex; }
+    .mobile_badge{ display: flex; }
+
+    .profile{
+        display: flex;
+        align-items: center;
+    }
+
+    .profile_info{ width: 90%; }
+
+    .initial_title{ width: 90%; }
+
+    .sidebar_1 textarea{ max-width: 100%; }
+
+    .container_title{ justify-content: space-between; }
+
+    .sidebar_1{ width: 100%; }
+
+    .personalization{ max-width: 100%; }
+
+    .profile_settings{margin-top: 70px; }
+
+    .user_config_container{
+        flex-flow: column wrap;
+        align-items: center;
+        justify-content: flex-start;
+        width: 100%;
+        height: auto;
+        gap: 0;
+    }
+
+    .user_config{
+        width: 90%;
+        justify-content: space-between;
+        margin-top: 20px;
+        gap: 0;
+    }
+}
+
+
+@media screen and (max-width: 500px){
+    .container_title h1{
+        font-size: 25px;
+    }
+
+    .mobile_picture{
+        width: 70px;
+        height: 70px;
+    }
+}
+
+@media screen and (max-width: 335px){
+    .personalization input{ width: 150px; }
+    .user_config .nickname{ min-width: auto; }
+}

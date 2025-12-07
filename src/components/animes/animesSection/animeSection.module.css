@@ -1,0 +1,126 @@
+/* -------------------------------------------- ANIME SECTION -------------------------------------------- */
+
+.anime_section{
+    margin: 0 auto;
+    width: 95%;
+    height: 290px;
+    padding: 1% 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    gap: 5px;
+}
+
+
+/* ------------------- TITLE CONTAINER ------------------- */
+
+.title_container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 2%;
+    width: 100%;
+    height: 30px;
+}
+
+.title_container h3{
+    margin-left: 20px;
+    font-size: 17px;
+}
+
+.title_container p{
+    display: none;
+    font-size: 11px;
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    width:80px;
+    height: 30px;
+    align-items: center;
+    justify-content: center;
+    margin-right: 20px;
+    border-radius: 7px;
+}
+
+
+/* ------------------- CAROUSEL ------------------- */
+
+.carousel{
+    height: 83%;
+    width: 93%;
+    display: flex;
+    overflow-x: auto;
+    overflow-y: hidden;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 19px;
+    transition: 1s;
+    overflow-X: scroll;
+    overflow-y: hidden;
+    scrollbar-width: none; 
+    scroll-behavior: smooth;
+    padding-left: 10px;
+    margin-right: 15px;
+}
+
+.carousel::-webkit-scrollbar { display: none; }
+
+
+/* ------------------- BUTTONS ------------------- */
+
+.backButton, .nextButton{
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: .3s;
+    z-index: 6;
+    background-size: cover;
+    border: 0;
+    background-color: white;
+    background-image: url("/buttons/moviment.png");
+
+}
+
+.backButton{
+    top: 55%;
+    left: 2%;
+    transform: translate(-2%,-55%) rotate(180deg);
+}
+
+.nextButton{
+    top: 55%;
+    left: 97%;
+    transform: translate(-97%,-55%);
+}
+
+.nextButton:hover, .backButton:hover{ background-color: #ccc; }
+
+/* ------------------- VIEW MORE OBJECT ------------------- */
+
+.viewMore_obj{
+    min-width: 10px;
+    min-height: 10px;
+}
+
+
+/* -------------------------------------------- MEDIA SCREENS -------------------------------------------- */
+
+@media screen and (max-width: 600px){
+    .title_container h3{
+        font-size: 14px;
+        margin-left: 0;
+    }
+
+    .carousel{
+        gap: 0;
+        width: 98%;
+        margin: 0 auto;
+        padding: 0;
+    }
+
+    .nextButton, .backButton{ display: none; }
+    .title_container p{ display: flex!important; }
+}

@@ -1,7 +1,6 @@
-.anime_single{
+/* -------------------------------------------- ANIME  -------------------------------------------- */
 
-    width: 140px;
-    height: 180px;  
+.anime{
     background-position: center;
     background-size: cover;
     border-radius: 7px;
@@ -9,35 +8,35 @@
     position: relative;
     transition: .5s;
     overflow: hidden;
+    z-index: 5;
+    min-width: 110px;
 }
 
-.anime_single::before{
+.anime::before{
     content: var(--title);
     width: 100%;
-    height: 120%;
+    height: 160%;
     display: flex;
-    justify-content: center;
     color: white;
     font-weight: bold;
     font-size: 12px;
     position: absolute;
     top:  0%;
     left: 0%;
-    transition: .5s;
+    transition: .4s;
     display: flex;
-    align-items: flex-end;
     justify-content: center;
+    align-items: flex-end;
     z-index: 3;
-    text-align: center;
-   
+    text-align: center; 
 }
 
-.anime_single:hover{
-    box-shadow: 0 0 13px 1px white;
+.anime:hover{
+    box-shadow: 0 0  6px var(--primary-color);
     transform: scale(1.1);
 }
 
-.anime_single::after{
+.anime::after{
     content: '';
     position: absolute;
     top: 0;
@@ -45,12 +44,8 @@
     width: 110%;
     height: 110%;
     z-index: 2;
-    transition: .5s;
+    transition: .4s;
 }
 
-.anime_single:hover.anime_single::before{
-    height: 90%;
-}
-.anime_single:hover.anime_single::after{
-    background-color: rgba(0,0,0,0.3);
-}
+.anime:hover.anime::before{ height: 88%; }
+.anime:hover.anime::after{ background-color: rgba(0,0,0,0.3); }

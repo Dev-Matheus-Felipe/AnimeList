@@ -1,7 +1,7 @@
 "use client"
 
 import { createContext, Dispatch, SetStateAction, useState } from "react";
-import Modal from "../modals/animeModal";
+import Modal from "../modals/anime/animeModal";
 import { AnimeData } from "@/lib/api";
 
 export type ModalContextType = {
