@@ -4,6 +4,23 @@ A Netflix-inspired anime streaming interface built with **Next.js**, featuring a
 
 ---
 
+## 📌 About the Project
+
+**AnimeList** is a web application that recreates the Netflix user experience, but fully focused on anime.  
+Users can:
+
+- 🔍 Search for anime in real time  
+- 🎭 Filter by genres and personal preferences  
+- ⭐ Add anime to their favorites  
+- 📚 Manage a personalized anime library (“My List”)  
+- 👤 Edit profile information  
+- 🧭 Navigate between **Home, Movies, Genres, My List, Profile and Search**
+- 🌓 Switch between **Light Mode and Dark Mode**
+
+The goal is to provide a clean, modern and immersive anime browsing experience. All preferences are saved in **Local Storage**, some require you to save manually, others don't.
+
+---
+
 ## 🖼️ Project Banner
 
 
@@ -36,22 +53,6 @@ A Netflix-inspired anime streaming interface built with **Next.js**, featuring a
   <img src="./public/screenshots/ProfilePage.png" alt="Profile Screenshot" width="80%" />
 </p>
 
----
-
-## 📌 About the Project
-
-**AnimeList** is a web application that recreates the Netflix user experience, but fully focused on anime.  
-Users can:
-
-- 🔍 Search for anime in real time  
-- 🎭 Filter by genres and personal preferences  
-- ⭐ Add anime to their favorites  
-- 📚 Manage a personalized anime library (“My List”)  
-- 👤 Edit profile information  
-- 🧭 Navigate between **Home, Movies, Genres, My List, Profile and Search**
-- 🌓 Switch between **Light Mode and Dark Mode**
-
-The goal is to provide a clean, modern and immersive anime browsing experience. All preferences are saved in **Local Storage**, some require you to save manually, others don't.
 
 ---
 
