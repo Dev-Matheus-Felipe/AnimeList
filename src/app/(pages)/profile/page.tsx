@@ -60,7 +60,7 @@ export default function Profile(){
         } else if (favoritesCount >= 36 && favoritesCount <= 40) {
             return "Supreme Ascendant";
         } else {
-            return "Legendary Overlord"; // para mais de 40
+            return "Legendary Overlord"; 
         }
     }
 

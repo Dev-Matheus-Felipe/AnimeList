@@ -12,7 +12,8 @@ import Image from "next/image";
 
 
 export default function Genres(){
-    const [actived, setActived] = useState<undefined | {id: number, page: number}>();
+    const [actived, setActived] = useState<undefined | {id: number, page: number, type: "tv" | "movie"}>();
+    const [loading, setLoading]  = useState<boolean>(false);
 
     const [animes, setAnimes] = useState<AnimeData[]>([]);
     const [getMore, setGetMore] = useState<boolean>(false);
@@ -29,13 +30,16 @@ export default function Genres(){
     // gets the animes for all type of requets
 
     useEffect(()=>{
+        
 
-        const newRequest = async () => { 
-            if(!actived) return; // typescript requirement
+        const newRequest = async () => {
+            if(!actived) return; 
+
+            if(actived.page == 1) setLoading(true);
 
             let animeParams : AnimeParams = {
                 page: actived.page,
-                type: "tv",
+                type: actived.type,
                 limit: 25,
             }
 
@@ -45,27 +49,33 @@ export default function Genres(){
             if(newAnimes.length < 25 ) setGetMore(false); // cancels the loadMore case there is no more animes
             else if(!getMore && newAnimes.length === 25) setGetMore(true);
 
-            if(actived.page === 1) // case the user switches the genres or to them
-                window.scrollTo({ top: 0, behavior: 'smooth' });
 
             setAnimes((prev: AnimeData[]) => (actived.page === 1) ? newAnimes : [...prev, ...newAnimes]);
+            setLoading(false);
         }
             
+        if(actived?.page === 1 || actived === undefined) // case the user switches the genres or to them
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+
        newRequest();
 
     },[actived])
 
 
-    // usefull for the mobile version but also works in the desktop one
+    // for the mobile version but also works in the desktop
 
     useEffect(() => {
-        
+        setLoading(true);
+        setAnimes([]);
+
         const id = Number(params.get("id"));
+
+        const type_param = params.get("type");
+        const type = (type_param !== "tv" && type_param !== "movie") ? "tv" : type_param;
 
         if (modalVersion.current && getComputedStyle(modalVersion.current).display === "flex" && !id) return; // mobile version control
 
-        setAnimes([]);
-        setActived({page: 1, id : (id) ? id : 0});
+        setActived({page: 1, id : (id) ? id : 0, type:  type});
     }, [pathname]);
 
 
@@ -78,13 +88,18 @@ export default function Genres(){
                 return ({...prev, page: prev.page + 1});
             });
         }
-    },[desktopInView, mobileInView]) // mobile and desktop use this function
+    },[desktopInView, mobileInView]) // mobile and desktop use this function~
+
 
     return (
         <> 
-            <div className={styles.desktop_genres}>
+
+            {/* DESKTOP GENRES */}
+            <div className={styles.desktop_genres}> 
+
+                {/* SIDEBAR */}
                 <div className={styles.sidebar}>
-                    <p className={(actived?.id === 0) ? styles.desktop_actived : ""} onClick={()=>setActived({id: 0, page: 1})}>
+                    <p className={(actived?.id === 0) ? styles.desktop_actived : ""} onClick={()=>setActived({id: 0, page: 1, type: "tv"})}>
                         Bests
                     </p>
                     
@@ -92,7 +107,7 @@ export default function Genres(){
                         genresData && genresData.map((e: GenresData) => (
                             <p 
                                 key={e.id} 
-                                onClick={() =>setActived({id: e.id, page: 1}) }
+                                onClick={() =>setActived({id: e.id, page: 1, type: "tv"}) }
                                 className={(actived?.id === e.id) ? styles.desktop_actived : ""}>
                                 {e.genre}
                             </p>
@@ -100,50 +115,68 @@ export default function Genres(){
                     }
                 </div>
 
-                <div className={styles.desktop_genres_animes}>
+                {/* ANIMES */}
+                
+                    { loading 
+                        ? <div className={styles.loading}>
+                                <Image src="/icons/general/loadingMore.svg" alt="Loading" width={40} height={40}/>
+                            </div>
 
-                    { animes && animes.map((e: AnimeData,index: number)=>(
-                        <Anime key={index} info={{anime: e, width: "150px", height: "220px"}}/> )) }
+                        : <div className={styles.desktop_genres_animes}>
+                            {animes && animes.map((e: AnimeData,index: number)=>(
+                                <Anime key={index} info={{anime: e, width: "150px", height: "220px"}}/> )) }
 
-                    <div className={styles.loadMore} ref={desktopRef} style={{display: (getMore) ? "block" : "none"}}>
-                        <Image src="/icons/general/loadingMore.svg" alt="Loading" width={40} height={40}/>
-                    </div>
-                </div>
 
+                            <div className={styles.loadMore} ref={desktopRef} style={{display: (getMore) ? "block" : "none"}}>
+                                <Image src="/icons/general/loadingMore.svg" alt="Loading" width={40} height={40}/>
+                            </div>
+                        </div> 
+                    }
+              
+
+                {/* CONFIG BUTTON */}
                 <div className={styles.desktop_genres_config}>
                     <button className={styles.genres_config_icon} onClick={()=> setConfig(true)} />
                 </div>
             </div>
 
+
+            {/* MOBILE GENRES */}
             <div className={styles.mobile_genres} ref={modalVersion}>
                 
                 { (actived === undefined)
                     ? 
                         <>
-                            <p onClick={()=>setActived({id: 0, page: 1})}>Bests</p>
+                            <p onClick={()=>setActived({id: 0, page: 1, type: "tv"})}>Bests</p>
 
                             { genresData && genresData.map((e)=>(
                                 <p 
                                     key={e.id} 
-                                    onClick={() => setActived({id: e.id, page: 1})}>{e.genre}</p> )) }
+                                    onClick={() => setActived({id: e.id, page: 1, type: "tv"})}>{e.genre}</p> )) }
                         </>
 
-                    :  
-                        <>
-                            <div className={styles.mobile_genres_animes}>
-                                { animes && animes.map((e : AnimeData, index : number)=>(
-                                    <Anime key={index} info={{anime: e, width: "150px", height: "220px"}} /> )) }
-
-                                <div className={styles.loadMore} ref={mobileRef} style={{display: (getMore) ? "block" : "none"}}>
-                                    <Image src="/icons/general/loadingMore.svg" alt="Loading" width={40} height={40} />
+                    :  loading 
+                            ? <div className={styles.loadingMobile}>
+                                    <Image src="/icons/general/loadingMore.svg" alt="Loading" width={40} height={40}/>
                                 </div>
-                            </div>
+                            :
+                            <>
+                                <div className={styles.mobile_genres_animes}>
+                                    { animes && animes.map((e : AnimeData, index : number)=>(
+                                        <Anime key={index} info={{anime: e, width: "150px", height: "220px"}} /> )) }
 
-                            <div className={styles.mobile_genres_config}>
-                                <button className={styles.genres_back_icon} onClick={() => setActived(undefined)} />
-                                <button className={styles.genres_config_icon} onClick={()=> setConfig(true)} />
-                            </div>
-                        </>
+                                    <div className={styles.loadMore} ref={mobileRef} style={{display: (getMore) ? "block" : "none"}}>
+                                        <Image src="/icons/general/loadingMore.svg" alt="Loading" width={40} height={40} />
+                                    </div>
+                                </div>
+
+                                <div className={styles.mobile_genres_config}>
+                                    <button className={styles.genres_back_icon} onClick={() => setActived(undefined)} />
+                                    <button className={styles.genres_config_icon} onClick={()=> setConfig(true)} />
+                                </div>
+                            </>
+                    
+                        
                 }
             </div>
 

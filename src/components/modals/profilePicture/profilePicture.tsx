@@ -1,9 +1,10 @@
+"use client"
+
 import React, { SetStateAction, useEffect, useState } from "react"
 import { UserData } from "@/app/(pages)/profile/page"
 import useEmblaCarousel from "embla-carousel-react"
 import styles from "./profilePicture.module.css"
 import Image from "next/image"
-
 
 export default function ProfilePicture({
     setModal, 
@@ -32,7 +33,7 @@ export default function ProfilePicture({
         else  emblaApi.scrollNext();
 
         const indice = emblaApi.selectedScrollSnap();
-        setCurrentSlide(indice + 1);
+        setCurrentSlide(indice + 1);    
     }
 
     // pick the chosen image
@@ -71,7 +72,7 @@ export default function ProfilePicture({
                                     alt="slide" 
                                     width={70} 
                                     height={70} 
-                                    className={`${styles.embla__slide} ${e === currentSlide && styles.ola}`} />
+                                    className={`${styles.embla__slide} ${e === currentSlide && styles.selected}`} />
 
                             ))
                         }

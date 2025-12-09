@@ -18,8 +18,8 @@
 
 .modal{
     z-index: 999;
-    width: 1100px;
-    min-height: 560px;
+    width: 1000px;
+    height: 530px;
     background-color: var(--animeModal-background);
     position: relative;
     border-radius: 10px;
@@ -28,6 +28,7 @@
     flex-flow: row wrap;
     align-items: center;
     box-shadow: 0 0 6px black;
+
 }
 
 .modal .close{
@@ -38,14 +39,14 @@
     border: 0;
     border-radius: 50%;
     position: absolute;
-    top: 2%;
-    left: 99%;
-    transform: translate(-99%,-2%);
+    top: 3%;
+    right: 2%;
+    transform: translate(-2%,-2%);
     cursor: pointer;
     transition: .5s;
 }
 
-.modal .close:hover{ transform: scale(1.1) translate(-90%, 0); }
+.modal .close:hover{ transform: scale(1.1) translate(-2%, -3%); }
 
 
 /* ------------------- IMAGE CONTAINER ------------------- */
@@ -70,7 +71,7 @@
 
 .description{
     width: calc(100% - 450px);
-    height: 450px;
+    height: 420px;
 }
 
 
@@ -87,7 +88,7 @@
 
 .title_container p{
     color: var(--primary-color);
-    font-size: 27px;
+    font-size: 24px;
 }
 
 .title_container span{
@@ -112,7 +113,7 @@
     border: 2px solid var(--primary-color);
     border-radius: 10%;
     padding: 5px 10px;
-    font-size: 14px;
+    font-size: 12px;
     color: var(--primary-color);
 }
 
@@ -121,43 +122,28 @@
 
 .synopsis_container{
     width: 100%;
+    display: flex;
+    flex-flow: row wrap;
     margin: 3% 0;
-    max-height: 250px;
+    max-height: 300px;
     overflow-y: auto;
 }
 
 .synopsis_container p{
     padding: 1%;
-    width: calc(100% - 50px);
-    font-size: 15px;
-    border-bottom: 1px solid var(--primary-color);
+    font-size: 13.5px;
     font-weight: 300;
     line-height: 30px;
     color: var(--primary-color);
 }
 
-/* Largura da barra de rolagem */
-::-webkit-scrollbar {
-  width: 10px;
+.synopsis_container span{
+    padding-left: 10px;
+    color: blueviolet;
+    text-decoration: underline;
+    cursor: pointer;
 }
 
-/* Track (fundo) */
-::-webkit-scrollbar-track {
-  background: #1e1e1e; /* cor do fundo */
-  border-radius: 10px;
-}
-
-/* Thumb (parte que se move) */
-::-webkit-scrollbar-thumb {
-  background: #555;      /* cor da barra */
-  border-radius: 10px;   /* cantos arredondados */
-  border: 2px solid #1e1e1e; /* deixa ela mais fininha */
-}
-
-/* Thumb ao passar o mouse */
-::-webkit-scrollbar-thumb:hover {
-  background: #888;
-}
 
 
 /* -------------------------------------------- MEDIA SCREENS -------------------------------------------- */
@@ -174,7 +160,6 @@
 
     .description{
         width: 60%;
-        height: 400px;
     }
 
     /* -- */
@@ -204,7 +189,6 @@
 
     .synopsis_container{
         width: 95%;
-        max-height: 200px;
     }
 
     .synopsis_container p{
@@ -233,7 +217,7 @@
 
     /* -- */
 
-    .description{  height: 360px; }
+
 }
 
 
@@ -244,26 +228,27 @@
         border-radius: 0;
         margin: 0;
         align-items: flex-start;
-        flex-direction: column;  
+        flex-flow: column nowrap;
         justify-content: flex-start;
         align-items: center;
+        overflow-y: auto;
     }
 
     /* -- */
 
+
     .image_container{
-        width: 280px;          
-        height: 380px;
+        width: 240px;          
+        height: 340px;
     }
 
     /* -- */
 
     .description{
-        width: 95%;            
+        width: 95%; 
         height: auto;
-        display: flex;
-        flex-flow: column wrap;
-        justify-content: flex-start;
+        max-height: none;
+        padding-bottom: 20px;
     }
 
     /* -- */
@@ -277,14 +262,14 @@
 
     .synopsis_container{
         width: 100%;
-        max-height: 200px;
-        margin-bottom: 20px;
+        max-height: none;
+        
     }
 
     .synopsis_container p{
-        height: auto;
         width: 100%;
         padding: 2%;
         font-size: 14px;
     }
+
 }

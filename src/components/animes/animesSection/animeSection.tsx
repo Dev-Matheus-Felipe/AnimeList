@@ -22,6 +22,7 @@ type info = {
 }
 
 export default function AnimeSection({info} : {info: info}){
+    const [loading, setLoading] = useState<boolean>(false);
     const [state, setState] = useState<State>({
         animes: info.animes,
         page: 2,
@@ -29,35 +30,36 @@ export default function AnimeSection({info} : {info: info}){
         nextButton: true
     });
 
-    const sectionRef = useRef< HTMLDivElement | null>(null);
+    const sectionRef = useRef<HTMLDivElement | null>(null);
     const {ref, inView} = useInView();
     const router = useRouter();
 
     // carousel and new requests configuration
 
-    const request = async (counter: number): Promise<void> => {
-        const el = sectionRef.current;
-        if (!el) return;
+    // goBack
 
+    const goBack = (el: HTMLDivElement) : void => {
+        el.scrollLeft = Math.max(0, el.scrollLeft - el.clientWidth);
+
+        if(Math.max(0, el.scrollLeft - el.clientWidth) == 0) 
+            setState((prev: State) => ({...prev, backButton: false}));
+
+        else if(!state.nextButton)
+            setState((prev: State) => ({...prev, nextButton: true}));
+    }
+
+
+    // goNext
+
+    const goNext = async (el: HTMLDivElement) : Promise<void> => {
+        const getMore = Math.floor(el.scrollLeft + el.clientWidth + 300) >= el.scrollWidth; 
         let backButton = state.backButton, nextButton = state.nextButton;
 
-        // back click
-
-        if (counter === -1) {  
-            el.scrollLeft = Math.max(0, el.scrollLeft - el.clientWidth);
-
-            if(Math.max(0, el.scrollLeft - el.clientWidth) == 0) 
-                setState((prev: State) => ({...prev, backButton: false}));
-
-            return;
-
-        } else if(counter == 1 && !state.backButton) backButton = true;
-
-        const getMore = Math.floor(el.scrollLeft + el.clientWidth + 300) >= el.scrollWidth; 
-
+        if(!backButton) backButton = true;
         // case user is at the end
 
-        if (getMore) { 
+        if (getMore && !loading) { 
+            setLoading(true);
             const animeParams: AnimeParams = {
                 page: state.page,
                 type: info.type,
@@ -66,7 +68,7 @@ export default function AnimeSection({info} : {info: info}){
             };
 
             const data = await fetchAnimes({ animeParams });
-            if (data.length < 10) backButton = false;
+            if(data.length < 10) nextButton = false;
             
             setState(prev => ({
                 animes: [...prev.animes, ...data],
@@ -75,7 +77,22 @@ export default function AnimeSection({info} : {info: info}){
                 nextButton: nextButton
             }));
             
-        } else el.scrollLeft = Math.min(el.scrollLeft + el.clientWidth, el.scrollWidth); 
+        } else 
+            el.scrollLeft = Math.min(el.scrollLeft + el.clientWidth, el.scrollWidth); 
+    }
+
+
+    // request
+
+    const request = (counter: number): void => {
+        const el = sectionRef.current;
+        if (!el) return;
+
+        if (counter === -1) 
+            goBack(el);
+
+        else 
+            goNext(el);
     };
 
     // att the carousel state
@@ -83,18 +100,23 @@ export default function AnimeSection({info} : {info: info}){
     useEffect(()=>{
         const el = sectionRef.current;
 
-        if(el && state.page > 2)
+        if(el && state.page > 2){
+            setLoading(false);
             el.scrollLeft = Math.min(el.scrollLeft + el.clientWidth, el.scrollWidth);
+        }
 
     },[state.animes]);
 
     return(
+
+        /* ANIME SECTION */
         <div className={styles.anime_section}>
             <div className={styles.title_container}>
                 <h3>{info.title}</h3>
-                {inView && <p onClick={() => router.push(`/genres?id=${info.genre}`) }>View More</p>}
+                {inView && <p onClick={() => router.push(`/genres?id=${info.genre}&type=${info.type}`) }>View More</p>}
             </div>
 
+            {/* CAROUSEL */}
             <div className={styles.carousel} ref={sectionRef}>
                 <button
                     className={styles.backButton}
@@ -104,7 +126,7 @@ export default function AnimeSection({info} : {info: info}){
 
                 <button
                     className={styles.nextButton}
-                    style={{visibility: (state.nextButton) ? "visible" :"hidden"  }} 
+                    style={{visibility: (state.nextButton && !loading) ? "visible" :"hidden"  }} 
                     disabled={!state.nextButton}
                     onClick={() => request(1)} />
 

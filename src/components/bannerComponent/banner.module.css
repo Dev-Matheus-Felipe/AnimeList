@@ -176,6 +176,29 @@
 .carousel_buttons button:hover{ border: 3px solid blueviolet; }
 .CbActived{ background-color: blueviolet!important; }
 
+.embla {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+}
+
+.embla__container {
+    display: flex;
+    align-items: center;
+    width: 100%; 
+    height: 100%;
+}
+
+.embla__slide {
+    flex: 0 0 auto;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 3px solid rgb(69, 69, 69);
+    margin-left: 13px;
+}
+
 
 /* -------------------------------------------- MEDIA SCREENS -------------------------------------------- */
 

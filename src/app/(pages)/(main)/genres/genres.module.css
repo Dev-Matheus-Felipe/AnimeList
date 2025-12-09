@@ -78,6 +78,22 @@
 
 /* ------------------- GENRES CONTAINER ------------------- */
 
+.loading,.loadingMobile{
+  width: 80%;
+  margin: 0 auto;
+  height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loading{
+  margin-top: 30px;
+  border-left: 1px solid var(--primary-color);
+
+}
+
+
 .desktop_genres_animes{
     max-width: 80%;
     display: flex;

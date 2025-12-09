@@ -1,11 +1,11 @@
 "use client"
 
+import { UserDataContext } from '../providers/profilePictureProvider';
 import { usePathname, useRouter } from 'next/navigation';
 import { useContext, useEffect, useState } from 'react';
 import styles from './navBar.module.css';
 import { useTheme } from 'next-themes';
 import Image from 'next/image';
-import { UserDataContext } from '../providers/profilePictureProvider';
 import Link from 'next/link';
 
 type DefinedRoute = {
@@ -14,134 +14,136 @@ type DefinedRoute = {
     icon: string
 }
 
+const getRoutes = (safeTheme: string | undefined) : DefinedRoute[] => ([
+    {pathname: "/", name: "Home", icon: `/icons/${safeTheme === "dark" ? "darkTheme" : "lightTheme"}/home.png`},
+    {pathname: "/movies", name: "Movies", icon: `/icons/${safeTheme === "dark" ? "darkTheme" : "lightTheme"}/clapperboard.png`},
+    {pathname: "/genres", name: "Genres", icon: `/icons/${safeTheme === "dark" ? "darkTheme" : "lightTheme"}/genres.svg`},
+    {pathname: "/my-list", name: "My list", icon: `/icons/${safeTheme === "dark" ? "darkTheme" : "lightTheme"}/heart.svg`},  
+])
+
 export function NavBar(){
-    const [line,setLine] = useState<string>("0");
-    const [mounted, setMounted] = useState<boolean>(false);
-
-    const { theme } = useTheme();
-
     const ctx = useContext(UserDataContext);
     if(!ctx) return null;
 
     const {userContext} = ctx;
 
-
-
+    const { theme } = useTheme();
     const pathName = usePathname();
     const router = useRouter();
 
-    // sets the auxilair up
+    const [inputSearch, setInputSearch] = useState<string>("");
+    const [mounted, setMounted] = useState<boolean>(false);
+    const safeTheme = mounted ? theme : "light";
 
-    useEffect(() => setMounted(true), []);
 
-    const safeTheme = mounted ? theme : "light"; 
+    const definedRoutes: DefinedRoute[] = getRoutes(safeTheme);
+    const line = (pathName && pathName !== "/" && pathName !== "/movies")  ? "100%" : "0%";
 
-    // we need an auxiliar to define the icons otherwise it won't work
+    const profileStyle = {
+        backgroundImage: (userContext) 
+            ? `url("/profilePictures/${userContext.image}a.jpg")` 
+            : " var(--navBar-profile);",
 
-    const definedRoutes: DefinedRoute[] = [
-        {pathname: "/", name: "Home", icon: `/icons/${safeTheme === "dark" ? "darkTheme" : "lightTheme"}/home.png`},
-        {pathname: "/movies", name: "Movies", icon: `/icons/${safeTheme === "dark" ? "darkTheme" : "lightTheme"}/clapperboard.png`},
-        {pathname: "/genres", name: "Genres", icon: `/icons/${safeTheme === "dark" ? "darkTheme" : "lightTheme"}/genres.svg`},
-        {pathname: "/my-list", name: "My list", icon: `/icons/${safeTheme === "dark" ? "darkTheme" : "lightTheme"}/heart.svg`},  
-    ];
+        width:  (userContext) ? "35px" : "22px",
+        height: (userContext) ? "35px" : "22px",
+        border: (userContext) ? "2px solid blueviolet" : "0"
+    };
 
     // search function 
 
-    const search =  (e : React.FormEvent<HTMLFormElement>) : void => {
-        e.preventDefault();
+    const search =  (e?: React.FormEvent<HTMLFormElement>) : void => {
+        if(e) e.preventDefault();
 
-        const data = new FormData(e.currentTarget);
-        router.push(`/search/id?page=1&limit=25&q=${data.get("name")}&order_by=score&sort=desc`);
+        const value = inputSearch.length === 0 || !inputSearch.trim();
+        if(value) return;
+        
+        router.push(`/search/id?page=1&limit=25&q=${inputSearch}&order_by=score&sort=desc`);
     }
 
-    // defines when the line will appear
+    // sets the auxilair
 
-    useEffect(()=>{
-        if(pathName && pathName !== "/" && pathName !== "/movies" )
-            setLine("100%");
-        else
-            setLine("0%");
-    },[pathName]);
+    useEffect(() => setMounted(true), []);
 
     return (
         <>
+            {/* DESKTOP NAVBAR */}
             <div className={styles.desktop_navBar}>
+                
+                {/* NAVEGATION */}
                 <div className={styles.desktop_navegation}>
                     {definedRoutes && definedRoutes.map((e: DefinedRoute, index: number) => (
                         <Link
                             key={index}
                             href={e.pathname}
-                            className={`${styles.link} ${(pathName === e.pathname) && styles.desktop_actived}`}>
+                            className={`${styles.link} ${(mounted && pathName === e.pathname) && styles.desktop_actived}`}>
                             {e.name}
                         </Link>
                     ))}
                 </div>
 
+                {/* ACTIONS */}
                 <div className={styles.desktop_actions}>
                     <div className={styles.actions_container}>
-                        <button className={styles.navBar_search_icon} />
+                        <button className={styles.navBar_search_icon} onClick={()=> search()} />
 
                         <form className={styles.desktop_navBar_form} onSubmit={search}>
-                            <input type='text' name='name' placeholder='Search for some anime....' required/>
+                            <input 
+                                type='text' 
+                                name='name' 
+                                value={inputSearch} 
+                                onChange={(e)=> setInputSearch(e.target.value)}
+                                placeholder='Search for some anime....' 
+                                required/>
                         </form>
                     </div>
 
-                    <button 
-                        className={styles.navBar_userIcon} 
-                        style={{
-                            backgroundImage: (userContext) 
-                                ? `url("/profilePictures/${userContext.image}a.jpg")` 
-                                : " var(--navBar-profile);",
-
-                            width:  (userContext) ? "35px" : "22px",
-                            height: (userContext) ? "35px" : "22px",
-                            border: (userContext) ? "2px solid blueviolet" : "0"
-                        }}
-
-                        onClick={() => router.push("/profile")} />
+                    {/* USER ICON */}
+                    <button className={styles.navBar_userIcon} onClick={() => router.push("/profile")} style={profileStyle} />  
                 </div>
 
                 <div className={styles.line} style={{width: line}} ></div>
             </div>
 
+            {/* MOBILE NAVBAR */}
             <div className={styles.mobile_navBar}>
                 {definedRoutes && definedRoutes.map((e: DefinedRoute, index: number) => (
                     <Link 
                         className={styles.mobile_navbar_link} 
                         href={e.pathname} 
                         key={index}>
+
                         <Image 
                             src={e.icon} 
                             alt={e.name + " Icon"} 
-                            width={27} 
-                            height={27}
+                            width={25} 
+                            height={25}
                             className={`${styles.mobile_navbar_image} ${(pathName === e.pathname) && styles.mobile_actived}`} />
-                        <p style={{display: (pathName === e.pathname) ? "block" :"none"}}>{e.name}</p>
+
+                        <p style={{display: (mounted && pathName === e.pathname) ? "block" :"none"}}>{e.name}</p>
                     </Link>
                 ))}
 
+                {/* PROFILE LINK */}
                 <Link className={styles.mobile_navbar_link} href="/profile">
-                    <button
-                         style={{
-                            backgroundImage: (userContext) 
-                                ? `url("/profilePictures/${userContext.image}a.jpg")` 
-                                : "var(--navBar-profile)",
-                                
-                            width:  (userContext) ? "35px" : "22px",
-                            height: (userContext) ? "35px" : "22px" 
-                        }}
-                        className={styles.mobile_navbar_image} 
-                    />
+                    <button style={profileStyle} className={styles.mobile_navbar_image} />
                     <p style={{display: (pathName === "/profile") ? "block" :"none"}}>Profile</p>
                 </Link>
             </div>
 
-            {
+
+            {   /* MOBILE SEARCH */
                 (pathName && pathName !== "/my-list" && pathName !== "/profile") && (
                     <div className={styles.mobile_search_container}>
-                        <button className={styles.navBar_search_icon} />
+
+                        <button className={styles.navBar_search_icon} onClick={()=> search()} />
                         <form className={styles.mobile_navBar_form} onSubmit={search}>
-                            <input type='text' name='name' placeholder='Search for some anime....' required/>
+                            <input 
+                                type='text' 
+                                name='name' 
+                                value={inputSearch} 
+                                onChange={(e)=> setInputSearch(e.target.value)}
+                                placeholder='Search for some anime....' 
+                                required/>
                         </form>
                     </div>
                 )
