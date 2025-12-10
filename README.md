@@ -71,7 +71,7 @@ To run this project locally, you will need:
 Clone the repository:
 
 ```bash
-git clone https://github.com/YOUR-USERNAME/AnimeList.git
+git clone https://github.com/Dev-Matheus-Felipe/AnimeList.git
 
 
 This project was created with Next.js 16 using create-next-app and expanded into a full anime browsing platform.
