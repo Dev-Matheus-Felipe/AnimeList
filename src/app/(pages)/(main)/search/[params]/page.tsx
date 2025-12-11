@@ -47,27 +47,31 @@ export default function Search(){
                     <button onClick={() => setConfig(prev => !prev)}>{(config) ? "-" : "+"}</button>
                 </div>
 
-                <div className={styles.results}>
-                    {
-                        (loading == true)
+                {
+                    (loading == true)
 
-                        ? <h2 style={{marginTop: 20}}>
-                            <Image style={{marginTop: 40}} 
-                                src="/icons/general/loadingMore.svg" 
-                                alt="load more" 
-                                width={50} 
-                                height={50}/>
-                        </h2>
+                     ? <div className={styles.container_loading}>
+                            <Image className={styles.loading_animes}
+                                    src="/icons/general/loadingMore.svg" 
+                                    alt="load more" 
+                                    width={50} 
+                                    height={50}/>
+                     </div>
 
-                        : (searchData.length == 0)
-                            ? <p>No anime found</p>
+                    : <div className={styles.results}>
+                        {
+                            (searchData.length == 0)
+                                ? <p>No anime found</p>
 
-                            : searchData.map((e: AnimeData, index: number)=>(
-                                <Anime info={{anime: e, width: "150px", height: "180px"}} key={index} /> ))
-                    }
-                </div>
-    
-                    { (!loading) && <BackNextButton params={dataParams} searchData={searchData}  /> } 
+                                : searchData.map((e: AnimeData, index: number)=>(
+                                    <Anime info={{anime: e, width: "150px", height: "180px"}} key={index} /> ))
+                        }
+
+                        
+                    </div>
+                }
+
+                { (!loading) && <BackNextButton params={dataParams} searchData={searchData}  /> } 
             </div>
 
             <SearchFilter config={config} setConfig={setConfig} params={dataParams} />

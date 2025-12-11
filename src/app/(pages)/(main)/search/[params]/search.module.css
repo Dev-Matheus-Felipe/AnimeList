@@ -23,6 +23,23 @@
 }
 
 
+
+.container_loading{
+    margin-top: 20px;
+    height: 300px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-top: 1px solid var(--primary-color);
+
+}
+
+.loading_animes{
+    display: block;
+    margin: 0 auto;
+}
+
 /* ------------------- TITLE CONTAINER ------------------- */
 
 .title_container{
@@ -69,10 +86,16 @@
     margin-top: 20px;
     border-top: 1px solid var(--primary-color);
     padding-top: 30px;
-    display: flex;
-    flex-flow: row wrap;
+    display: grid;
     justify-content: center;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 140px));
     gap: 20px;
+}
+
+.results p{
+    text-align: center;
+    width: 100%;
+    grid-column: 1 / -1;
 }
 
 :global(.searchButtons){
@@ -83,20 +106,28 @@
     justify-content: space-between;
 }
 
+.results :global(.anime){ min-width: 100%!important; }
 
 /* -------------------------------------------- MEDIA SCREENS -------------------------------------------- */
 
 @media screen and (max-width: 730px){ .search_container{ padding-top: 50px; } }
 
-@media screen and (max-width: 510px){
-    .search_results{ gap: 2px; }
-    .search_results :global(.anime){ min-width: 105px!important; }
+@media screen and (max-width: 633px){
+    .results, .search{
+        min-width: 100%;
+    }
+
+    .results{
+        grid-template-columns: repeat(3, 140px);
+        gap: 30px;
+    }
+}
+
+@media screen and (max-width: 504px){
+    .results{
+        grid-template-columns: repeat(3, minmax(0,130px));
+        gap: 5px;
+    }
 }
 
 
-@media screen and (max-width: 439px){ .search_results{ gap: 0px; } .results{gap: 5px;} .title_container, .results{ width: 90%;} }
-
-@media screen and (max-width: 359px){
-    .results, .search{min-width: 100%!important; gap: 0;}
-    .results :global(.anime){ min-width: 100px!important; }
-}
