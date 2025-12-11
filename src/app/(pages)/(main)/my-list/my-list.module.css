@@ -15,7 +15,6 @@
 .myList_container h1{
     width: 100%;
     padding-bottom: 20px;
-    margin-bottom: 20px;
     border-bottom: 1px solid var(--primary-color);
     font-size: 25px;
     
@@ -23,15 +22,19 @@
 
 .myList{
     width: 100%;
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 130px); 
+    grid-auto-rows: 200px;
     flex-flow: row wrap;
     gap: 20px;
-      
+    justify-content: center;   
 }
 
 /* -------------------------------------------- MEDIA SCREENS -------------------------------------------- */
 
-@media screen and (max-width: 870px){ .myList{ justify-content: center; }}
+@media screen and (max-width: 730px){
+    .myList{ margin-bottom: 30px; }
+}
 
 @media screen and (max-width: 513px){
     .myList_container{ padding: 5% 2%; }
@@ -49,7 +52,7 @@
 }
 
 @media screen and (max-width: 513px){
-    .myList{ gap: 30px; }
+    .myList{ gap: 10px; }
 
     .myList_container h1{
         margin: 10px auto 30px auto;
@@ -57,3 +60,19 @@
         width: 90%;
     }
 }
+
+
+@media screen and (max-width: 427px){ 
+    .myList{ 
+        gap: 10px;   
+        grid-template-columns: repeat(auto-fill, 100px); 
+        grid-auto-rows: 150px;
+    }
+
+    .myList > :global(.anime){
+        min-width: 100%!important;
+        height: 150px!important;
+    }
+}
+
+@media screen and (max-width: 325px){ .myList{ gap: 10px; } }

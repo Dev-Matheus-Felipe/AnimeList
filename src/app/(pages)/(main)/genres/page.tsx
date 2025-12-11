@@ -122,15 +122,16 @@ export default function Genres(){
                                 <Image src="/icons/general/loadingMore.svg" alt="Loading" width={40} height={40}/>
                             </div>
 
-                        : <div className={styles.desktop_genres_animes}>
-                            {animes && animes.map((e: AnimeData,index: number)=>(
-                                <Anime key={index} info={{anime: e, width: "150px", height: "220px"}}/> )) }
-
+                        : <div className={styles.helper}>
+                            <div className={styles.desktop_genres_animes}>
+                                {animes && animes.map((e: AnimeData,index: number)=>(
+                                    <Anime key={index} info={{anime: e, width: "150px", height: "220px"}}/> )) }
+                            </div> 
 
                             <div className={styles.loadMore} ref={desktopRef} style={{display: (getMore) ? "block" : "none"}}>
                                 <Image src="/icons/general/loadingMore.svg" alt="Loading" width={40} height={40}/>
                             </div>
-                        </div> 
+                        </div>
                     }
               
 
@@ -160,21 +161,22 @@ export default function Genres(){
                                     <Image src="/icons/general/loadingMore.svg" alt="Loading" width={40} height={40}/>
                                 </div>
                             :
-                            <>
+                            <div className={styles.helper}>
                                 <div className={styles.mobile_genres_animes}>
                                     { animes && animes.map((e : AnimeData, index : number)=>(
                                         <Anime key={index} info={{anime: e, width: "150px", height: "220px"}} /> )) }
-
-                                    <div className={styles.loadMore} ref={mobileRef} style={{display: (getMore) ? "block" : "none"}}>
-                                        <Image src="/icons/general/loadingMore.svg" alt="Loading" width={40} height={40} />
-                                    </div>
                                 </div>
+
+                                <div className={styles.loadMore} ref={mobileRef} style={{display: (getMore) ? "block" : "none"}}>
+                                    <Image src="/icons/general/loadingMore.svg" alt="Loading" width={40} height={40} />
+                                </div>
+                                
 
                                 <div className={styles.mobile_genres_config}>
                                     <button className={styles.genres_back_icon} onClick={() => setActived(undefined)} />
                                     <button className={styles.genres_config_icon} onClick={()=> setConfig(true)} />
                                 </div>
-                            </>
+                            </div>
                     
                         
                 }

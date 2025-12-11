@@ -3,8 +3,8 @@
 .loadMore, .mobileLoadMore{
   width: 100%;
   text-align: center;
-  height: 100px;
-  padding: 50px 0;
+  height: 70px;
+  margin: 50px 0;
 }
 
 .mobileLoadMore{
@@ -20,11 +20,17 @@
     font-weight: bold!important;
 }
 
+.helper{
+  width: 100%;
+  height: 100%;
+}
+
 
 /* -------------------------------------------- DESKTOP GENRES -------------------------------------------- */
 
 .desktop_genres{
-    display: flex;
+    display: grid;
+    grid-template-columns: 1.1fr 7fr;
     align-items: flex-start;
     width: 100%;
 }
@@ -54,17 +60,18 @@
 /* ------------------- SIDEBAR ------------------- */
 
 .sidebar{
-    width: 200px;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 10px;
-    padding: 50px 0 10px 30px;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-right: 1px solid var(--primary-color);
 }
 
 
 .sidebar p{
-    width:  95%;
+    width:  80%;
     text-align: center;
     padding: 15px 15px;
     font-size: 13px;
@@ -89,22 +96,20 @@
 
 .loading{
   margin-top: 30px;
-  border-left: 1px solid var(--primary-color);
 
 }
 
 
 .desktop_genres_animes{
-    max-width: 80%;
-    display: flex;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 150px);
     margin: 0 auto;
     margin-top: 30px;
-    flex-flow: row wrap;
     align-items: flex-start;
-    justify-content: flex-start;
+    justify-content: center;
     gap: 20px;
-    padding-left: 40px;
-    border-left: 1px solid var(--primary-color);
+    padding: 0 10px;
 }
 
 
@@ -130,11 +135,13 @@
 
 
 .mobile_genres_animes{
-  display: flex;
-  flex-flow: row wrap;
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(auto-fill, 140px);
+  grid-template-rows: 200px;
   justify-content: center;
-  width: auto;
-  gap: 5px;
+  gap: 30px;
+
 }
 
 
@@ -170,36 +177,13 @@
 
 /* -------------------------------------------- MEDIA SCREENS -------------------------------------------- */
 
-
-@media screen and (max-width: 1100px){
-  .sidebar { width: 150px; } 
-  .sidebar > p{
-        width:  90%!important;
-        padding: 12px 12px;
-        font-size: 12px;
-      
-    }
-}
+@media screen and (max-width: 1044px){ .desktop_genres{ grid-template-columns: 170px 7fr; } }
 
 
 @media screen and (max-width: 730px){
   .mobile_genres{ display: flex; }
-
-
   .desktop_genres{ display: none; }
-
-  .mobile_genres_animes .anime_single {
-    min-width: 140px!important;
-    height: 200px!important;
-  }
-
-  .mobile_genres_animes{
-    gap: 20px;
-  }
-
-  .mobile_genres_config{
-    flex-direction: row;
-  }
+  .mobile_genres_config{ flex-direction: row; }
 }
 
 @media screen and (max-width: 535px){
@@ -209,35 +193,22 @@
     padding: 9px;
   }
 
-  :global(.anime) {
-    min-width: 100px!important;
-    height: 150px!important;
+  .mobile_genres_animes{
+    gap: 10px;
+    grid-template-columns: repeat(auto-fill, 100px);
+    grid-template-rows: 150px;
+
+  }
+
+  :global(.anime){
+      min-width: 100%!important;
+      height: 150px!important;
   }
 }
 
 
 
-@media screen and (max-width: 481px){
-  .mobile_genres{ display: flex; }
 
-  .desktop_genres{ display: none; }
-
-  
-  .mobile_genres_animes .anime_single {
-    min-width: 100px!important;
-    height: 140px!important;
-  }
-}
-
-@media screen and (max-width: 354px){ .mobile_genres_animes{ gap: 0; } }
-
-@media screen and (max-width: 314px){
-  .mobile_genres_animes{ gap: 20px; }
-  .mobile_genres_animes .anime_single {
-      min-width: 130px!important;
-      height: 180px!important;
-    }
-}
 
 
 /*---------------------- */

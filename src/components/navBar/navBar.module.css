@@ -141,16 +141,6 @@
 }
 
 
-
-.navBar_search_icon:hover + form input, 
-.actions_container form input:hover, 
-.actions_container form input:focus {
-    opacity: 1;
-    width: 250px!important;
-    padding: 2% 40px 2% 7%;
-}
-
-
 /* -------------------------------------------- MOBILE NAV BAR -------------------------------------------- */
 
 
