@@ -35,9 +35,7 @@ export function NavBar(){
     const [mounted, setMounted] = useState<boolean>(false);
     const safeTheme = mounted ? theme : "light";
 
-
     const definedRoutes: DefinedRoute[] = getRoutes(safeTheme);
-    const line = (pathName && pathName !== "/" && pathName !== "/movies")  ? "100%" : "0%";
 
     const profileStyle = {
         backgroundImage: (userContext) 
@@ -101,7 +99,9 @@ export function NavBar(){
                     <button className={styles.navBar_userIcon} onClick={() => router.push("/profile")} style={profileStyle} />  
                 </div>
 
-                <div className={styles.line} style={{width: line}} ></div>
+                <div 
+                    className={styles.line} 
+                    style={{width: (mounted && pathName !== "/" && pathName !== "/movies")  ? "100%" : "0%"}} ></div>
             </div>
 
             {/* MOBILE NAVBAR */}
