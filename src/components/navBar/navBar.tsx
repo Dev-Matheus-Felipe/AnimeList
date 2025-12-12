@@ -82,7 +82,7 @@ export function NavBar(){
                 {/* ACTIONS */}
                 <div className={styles.desktop_actions}>
                     <div className={styles.actions_container}>
-                        <button className={styles.navBar_search_icon} onClick={()=> search()} />
+                        <button className={styles.navBar_search_icon} onClick={()=> search()} aria-label='icone pesquisar' />
 
                         <form className={styles.desktop_navBar_form} onSubmit={search}>
                             <input 
@@ -96,7 +96,11 @@ export function NavBar(){
                     </div>
 
                     {/* USER ICON */}
-                    <button className={styles.navBar_userIcon} onClick={() => router.push("/profile")} style={profileStyle} />  
+                    <button 
+                        className={styles.navBar_userIcon} 
+                        aria-label='profile'
+                        onClick={() => router.push("/profile")} 
+                        style={profileStyle} />  
                 </div>
 
                 <div 
@@ -125,7 +129,7 @@ export function NavBar(){
 
                 {/* PROFILE LINK */}
                 <Link className={styles.mobile_navbar_link} href="/profile">
-                    <button style={profileStyle} className={styles.mobile_navbar_image} />
+                    <button style={profileStyle} className={styles.mobile_navbar_image} aria-label='ir para profile' />
                     <p style={{display: (pathName === "/profile") ? "block" :"none"}}>Profile</p>
                 </Link>
             </div>
@@ -135,7 +139,7 @@ export function NavBar(){
                 (pathName && pathName !== "/my-list" && pathName !== "/profile") && (
                     <div className={styles.mobile_search_container}>
 
-                        <button className={styles.navBar_search_icon} onClick={()=> search()} />
+                        <button className={styles.navBar_search_icon} onClick={()=> search()} aria-label='icone pesquisar' />
                         <form className={styles.mobile_navBar_form} onSubmit={search}>
                             <input 
                                 type='text' 

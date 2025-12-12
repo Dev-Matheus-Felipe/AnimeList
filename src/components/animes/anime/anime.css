@@ -1,8 +1,6 @@
 /* -------------------------------------------- ANIME  -------------------------------------------- */
 
 .anime{
-    background-position: center;
-    background-size: cover;
     border-radius: 7px;
     cursor: pointer;
     position: relative;
@@ -10,6 +8,12 @@
     overflow: hidden;
     z-index: 5;
     min-width: 110px;
+}
+
+.anime_image{
+    min-width: 100%;
+    width: auto;
+    height: 100%;
 }
 
 .anime::before{

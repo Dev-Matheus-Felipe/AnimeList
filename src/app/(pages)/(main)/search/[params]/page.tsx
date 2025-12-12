@@ -44,7 +44,7 @@ export default function Search(){
 
                 <div className={styles.title_container}>
                     <h2>Anime found:</h2>
-                    <button onClick={() => setConfig(prev => !prev)}>{(config) ? "-" : "+"}</button>
+                    <button aria-label="personalizated search" onClick={() => setConfig(prev => !prev)}>{(config) ? "-" : "+"}</button>
                 </div>
 
                 {

@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { AnimeData } from '@/lib/api';
 import { useContext } from 'react';
 import "./anime.css"
+import Image from 'next/image';
 
 export type AnimeSingleInfo = {
     anime: AnimeData,
@@ -28,7 +29,6 @@ export function Anime({info}: {info: AnimeSingleInfo}){
     // anime style
 
     const style = {
-        backgroundImage: `url('${ info.anime.large_image }')`, 
         "--title": `"${info.anime.title.slice(0,36)}"`,
         minWidth: info.width,
         height: info.height
@@ -36,22 +36,18 @@ export function Anime({info}: {info: AnimeSingleInfo}){
     } as React.CSSProperties;
 
     return(
-        <>
-            <motion.div 
-                variants={variantes}
-                initial="hidden"
-                animate="visible"
-                viewport={{amount: 0}}
-                transition={{
-                    delay: 0.5,
-                    ease: "easeInOut",
-                    duration: 0.5
-                }}
-                
-                className="anime" 
-                onClick={()=> setModal(info.anime)}
-                style={style}
-            ></motion.div >
-        </>
+        <motion.div 
+            variants={variantes}
+            initial="hidden"
+            animate="visible"
+            viewport={{amount: 0}}
+            transition={{ delay: 0.5, ease: "easeInOut", duration: 0.5 }}
+            className="anime" 
+            onClick={()=> setModal(info.anime)}
+            style={style}>
+                <Image src={`${info.anime.image}`} alt='anime image' width={100} height={200} className="anime_image"  />
+
+        </motion.div >
+
     )
 }

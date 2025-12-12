@@ -34,7 +34,7 @@ export default function Modal({anime} : {anime: AnimeData}){
 
             {/* MODAL */}
             <div className={styles.modal}>
-                <button className={styles.close} onClick={()=>{setModal(null)} }/>
+                <button className={styles.close} onClick={()=>{setModal(null)} } aria-label="close modal" />
 
                 <div className={styles.image_container}>
                     <Image 

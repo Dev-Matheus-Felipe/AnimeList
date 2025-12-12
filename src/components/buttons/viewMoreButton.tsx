@@ -12,6 +12,8 @@ export default function ViewButton({anime} : {anime: AnimeData}){
     const { setModal } = ctx;
     
     return (
-        <button className="viewMore" onClick={() => setModal(anime)}>View More</button>
+        <button className="viewMore" aria-label="ver descricao" onClick={() => setModal(anime)}>
+            View More
+        </button>
     )
 }

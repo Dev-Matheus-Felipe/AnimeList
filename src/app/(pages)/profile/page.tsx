@@ -138,9 +138,10 @@ export default function Profile(){
                             className={styles.theme} 
                             onClick={()=>setThemeState(prev => !prev)}
                             style={{height: (themeState) ? "80px" : "35px"}}>
-                            <button className={styles.theme_chosen}>{safeTheme}<span /></button>
+                            <button aria-label="theme choosed" className={styles.theme_chosen}>{safeTheme}<span /></button>
 
                             <button 
+                                aria-label="theme"
                                 onClick={()=> setTheme(()=>(safeTheme === "dark" ? "light" : "dark"))}
                                 className={styles.theme_option}>
                                     {safeTheme === "dark" ? "light" : "dark"}
@@ -186,7 +187,7 @@ export default function Profile(){
                         onChange={(e) => setUserData((prev: UserData) => ({...prev, age: e.target.value.slice(0,2)}))}/>
                 </div>
 
-                <button className={styles.save} onClick={() => saveData()}>Save</button>
+                <button className={styles.save} onClick={() => saveData()} aria-label="save">Save</button>
             </div>
 
             {modal && <ProfilePicture setModal={setModal} userData={userData} setUserData={setUserData} />}

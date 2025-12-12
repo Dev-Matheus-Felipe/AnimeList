@@ -37,6 +37,8 @@ export default function AddRemoveButtons({anime} : {anime: AnimeData}){
     }, [myList]);
 
     return (
-        <button className="addRemove" onClick={()=>buttonhandler()}>{!hasAdd ? "+ Add" : "Remove"}</button>
+        <button className="addRemove" onClick={()=>buttonhandler()} aria-label="adicionar para a lista">
+            {!hasAdd ? "+ Add" : "Remove"}
+        </button>
     )
 }

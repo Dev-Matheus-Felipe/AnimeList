@@ -81,8 +81,8 @@ export default function ProfilePicture({
 
                 <div className={styles.buttons}>
                     <div className={styles.moviment_buttons}>
-                        <button className={styles.back} onClick={()=> handlerButtons(0)} />
-                        <button className={styles.next} onClick={()=> handlerButtons(1)} />
+                        <button className={styles.back} onClick={()=> handlerButtons(0)} aria-label="go back carousel" />
+                        <button className={styles.next} onClick={()=> handlerButtons(1)} aria-label="go next carousel" />
                     </div>   
                     <button className={styles.save} onClick={() => imageChosen()}>Select</button>
                 </div>

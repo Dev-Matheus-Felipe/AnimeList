@@ -27,7 +27,9 @@ export default function RootLayout({
           <AnimeListProvider>
             <ModalProvider>
               <ProfilePictureProvider>
-                {children}
+                <main>
+                  {children}
+                </main>
               </ProfilePictureProvider>
             </ModalProvider>
           </AnimeListProvider>

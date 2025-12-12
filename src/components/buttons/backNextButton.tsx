@@ -56,6 +56,7 @@ export default function BackNextButton({searchData, params}: BackNextButtonsProp
 
             <button
                 className="button next"
+                aria-label="trocar de pagina"
                 onClick={() => buttonHandler(1)}
                 style={{
                     visibility:

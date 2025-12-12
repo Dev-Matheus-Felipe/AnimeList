@@ -21,7 +21,7 @@ export default  function BannerComponent({route} : {route : "home" | "movies"}){
                             <p style={{color: (route === "home" ? "black" : "gold")}} >⭐ {data[0].score}</p>
                         </div>
 
-                        <h5 className={styles.top_rated}>Top Rated</h5>
+                        <h2 className={styles.top_rated}>Top Rated</h2>
                         <p className={styles.banner_synopsis} >
                             {data[0].synopsis.slice(0,295)}...
                         </p>

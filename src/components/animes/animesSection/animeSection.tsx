@@ -119,12 +119,14 @@ export default function AnimeSection({info} : {info: info}){
             {/* CAROUSEL */}
             <div className={styles.carousel} ref={sectionRef}>
                 <button
+                    aria-label="go back carousel"
                     className={styles.backButton}
                     style={{visibility: (state.backButton) ? "visible" : "hidden" }} 
                     disabled={state.page === 1}
                     onClick={() => request(-1)} />
 
                 <button
+                    aria-label="get next carousel"
                     className={styles.nextButton}
                     style={{visibility: (state.nextButton && !loading) ? "visible" :"hidden"  }} 
                     disabled={!state.nextButton}

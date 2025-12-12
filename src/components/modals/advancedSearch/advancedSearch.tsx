@@ -117,7 +117,7 @@ export default function AdvancedSearch({
     return (
         <div className={styles.blur} style={{ display: config ? "flex" : "none" }} >
             <div className={styles.container_filter} >
-                <button className={styles.close} onClick={()=>{setConfig(false)} }/>
+                <button className={styles.close} onClick={()=>{setConfig(false)} } aria-label="close modal" />
 
                 <form className={styles.form_filter} onSubmit={searchAnimes}>
                     <h1>Filter</h1>
@@ -136,6 +136,7 @@ export default function AdvancedSearch({
 
                         <div className={styles.types}>
                             <button
+                                aria-label="select type"
                                 type="button"
                                 className={state.type === "tv" ? styles.typeSelected : ""}
                                 onClick={() => setState(prev => ({ ...prev, type: "tv" }))}
@@ -144,6 +145,7 @@ export default function AdvancedSearch({
                             </button>
 
                             <button
+                                aria-label="select type"
                                 type="button"
                                 className={state.type === "movie" ? styles.typeSelected : ""}
                                 onClick={() => setState(prev => ({ ...prev, type: "movie" }))}
