@@ -5,23 +5,55 @@ import AnimeSection from "../animes/animesSection/animeSection";
 import { useInView } from "react-intersection-observer";
 import styles from "./controlerLoading.module.css";
 import { genresData } from "@/lib/dataAnimes";
-import { useEffect, useState } from "react";
+import { useEffect, useReducer, useRef, useState } from "react";
 import Image from "next/image";
 
-interface LoadedAnime {
+type LoadedAnime = {
     title: string;
     animes: AnimeData[];
 }
 
+type State = {
+    loadedAnimes: LoadedAnime[],
+    currentIndex: number,
+ }
+
+ type Action = {
+    type: "nextSection", 
+    payload?: {title: string, animes: AnimeData[]}
+ }
+
+const animeSectionReducer = (state : State , action : Action) : State => {
+    switch(action.type){
+        case "nextSection":
+            if(!action.payload) return state;
+
+            return {
+                ...state, 
+                currentIndex: state.currentIndex + 1, 
+                loadedAnimes: [...state.loadedAnimes, action.payload ],
+            };
+        
+        default: return state;
+        
+    }
+}
+
 export default function ControlerLoading({ type, startIndex }: { type: "tv" | "movie", startIndex: number }) {
-    const [loadedAnimes, setLoadedAnimes] = useState<LoadedAnime[]>([]);
-    const [currentIndex, setCurrentIndex] = useState(startIndex);
+    const [ state, dispatch ] = useReducer(animeSectionReducer, {
+        loadedAnimes: [],
+        currentIndex: startIndex,
+    });
+
+    const [ loading, setLoading ] = useState<boolean>(false);
 
     const { ref, inView } = useInView();
 
+
     useEffect(() => {
-        if (inView && currentIndex < genresData.length) {
-            const genre = genresData[currentIndex];
+        const getSection = async() => {
+            
+            const genre = genresData[state.currentIndex];
 
             const animeParams: AnimeParams = {
                 type,
@@ -30,17 +62,24 @@ export default function ControlerLoading({ type, startIndex }: { type: "tv" | "m
                 genres: [genre.id],
             };
 
-            fetchAnimes({ animeParams }).then((res: AnimeData[]) => {
-                setLoadedAnimes(prev => [...prev, { title: genre.label, animes: res ?? [] }]);
-                setCurrentIndex(prev => prev + 1);
-            });
+           const data : AnimeData[] = await fetchAnimes({ animeParams });
+            if(data) dispatch({type: "nextSection", payload: { title: genre.label, animes: data }})
         }
-    }, [inView, currentIndex, type]);
+
+        if (inView && state.currentIndex < genresData.length && !loading ){
+            setLoading(true);
+            getSection();
+
+            setTimeout(() => {
+                setLoading(false);
+            }, 1000);
+        }
+    }, [inView, state.currentIndex, type, loading]);
 
     return (
         <>
            {
-                loadedAnimes.map((section: LoadedAnime, i: number) => {
+                state.loadedAnimes && state.loadedAnimes.map((section: LoadedAnime, i: number) => {
                     const genre = genresData[startIndex + i];
                     if (!genre) return null;
 
@@ -58,7 +97,7 @@ export default function ControlerLoading({ type, startIndex }: { type: "tv" | "m
                 })
            }
 
-            {currentIndex < genresData.length && (
+            { state.currentIndex < genresData.length  && (
                 <div className={styles.loadMore} ref={ref}>
                     <Image src="/icons/general/loadingMore.svg" alt="Loading" width={40} height={40} />
                 </div>

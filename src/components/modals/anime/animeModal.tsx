@@ -13,7 +13,7 @@ export default function Modal({anime} : {anime: AnimeData}){
 
     const [seeMore, setSeeMore] = useState<boolean>(true);
 
-    const synopsis = anime.synopsis;
+    const synopsis = anime.synopsis ?? "";
     const { setModal } = ctx;
     
 

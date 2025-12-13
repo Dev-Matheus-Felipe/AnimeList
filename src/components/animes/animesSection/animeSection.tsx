@@ -41,11 +41,11 @@ export default function AnimeSection({info} : {info: info}){
     const goBack = (el: HTMLDivElement) : void => {
         el.scrollLeft = Math.max(0, el.scrollLeft - el.clientWidth);
 
-        if(Math.max(0, el.scrollLeft - el.clientWidth) == 0) 
-            setState((prev: State) => ({...prev, backButton: false}));
-
-        else if(!state.nextButton)
-            setState((prev: State) => ({...prev, nextButton: true}));
+        setState(prev => ({
+            ...prev,
+            backButton: (Math.max(0, el.scrollLeft - el.clientWidth) == 0) ? false : true,
+            nextButton: true
+        }))
     }
 
 
@@ -106,6 +106,10 @@ export default function AnimeSection({info} : {info: info}){
         }
 
     },[state.animes]);
+
+    useEffect(()=>{
+        if(info.animes.length < 10) setState((prev: State) => ({...prev, nextButton: false}))
+    },[])
 
     return(
 

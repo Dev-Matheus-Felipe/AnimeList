@@ -1,4 +1,3 @@
-"use cache"
 
 export type AnimeParams = {
     page: number;
@@ -48,7 +47,7 @@ export async function fetchAnimes({animeParams}: {animeParams : AnimeParams}): P
         baseUrl += `&min_score=${animeParams.min_score}`;
 
     
-    const response: Response = await fetch(baseUrl, { cache: 'force-cache', });
+    const response: Response = await fetch(baseUrl, { cache: 'no-store', });
     const data = await response.json().then(res => res.data).catch(() => []);
 
     if(data)

@@ -47,6 +47,7 @@
     display: flex;
     flex-flow: row wrap;
     justify-content: space-between;
+
 }
 
 .title_container h2{
@@ -81,10 +82,10 @@
 /* ------------------- RESULTS ------------------- */
 
 .results{
+    border-top: 1px solid var(--primary-color);
     max-width: 850px;
     min-width: 300px;
     margin-top: 20px;
-    border-top: 1px solid var(--primary-color);
     padding-top: 30px;
     display: grid;
     justify-content: center;

@@ -9,7 +9,7 @@ export const homeBanner: AnimeData[] = [
     large_image: "/banners/home/mobile/modals/frierenModal.webp",
     banner_desktop_image: "/banners/home/homebanner.webp",
     banner_mobile_image: "/banners/home/mobile/frieren.jpg",
-    image: ""
+    image: "/banners/home/mobile/modals/frierenModal.webp"
   },
 
   {
@@ -19,7 +19,7 @@ export const homeBanner: AnimeData[] = [
     score: 8.64,
     large_image: "/banners/home/mobile/modals/kiritoAsunaModal.webp",
     banner_mobile_image: "/banners/home/mobile/kiritoAsuna.jpg",
-    image: ""
+    image: "/banners/home/mobile/modals/kiritoAsunaModal.webp"
 
   },
 
@@ -30,7 +30,7 @@ export const homeBanner: AnimeData[] = [
     score: 9.29,
     large_image: "/banners/home/mobile/modals/maomaoModal.webp",
     banner_mobile_image: "/banners/home/mobile/maomao.jpg",
-    image: "" 
+    image: "/banners/home/mobile/modals/maomaoModal.webp" 
 
   }
 ]
@@ -44,7 +44,7 @@ export const movieBanner: AnimeData[] = [
     large_image: "/banners/movies/mobile/modals/denji.webp",
     banner_desktop_image: "/banners/movies/moviesBanner.webp",
     banner_mobile_image: "/banners/movies/mobile/denji.jpg",
-    image: "",
+    image: "/banners/movies/mobile/modals/denji.webp",
   },
 
   {
@@ -54,7 +54,7 @@ export const movieBanner: AnimeData[] = [
     score: 8.83,
     large_image: "/banners/movies/mobile/modals/yourname.webp",
     banner_mobile_image: "/banners/movies/mobile/yourname.jpg",
-    image: "",
+    image: "/banners/movies/mobile/modals/yourname.webp",
 
   },
 
@@ -65,7 +65,7 @@ export const movieBanner: AnimeData[] = [
     score: 8.0,
     large_image: "/banners/movies/mobile/modals/kimetsu.webp",
     banner_mobile_image: "/banners/movies/mobile/kimetsu.jpg",
-    image: "",
+    image: "/banners/movies/mobile/modals/kimetsu.webp",
 
   }
 ]

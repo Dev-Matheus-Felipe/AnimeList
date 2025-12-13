@@ -52,10 +52,12 @@ export function NavBar(){
     const search =  (e?: React.FormEvent<HTMLFormElement>) : void => {
         if(e) e.preventDefault();
 
-        const value = inputSearch.length === 0 || !inputSearch.trim();
-        if(value) return;
+        const searchValue = inputSearch;
+        setInputSearch("");
+
+        if(inputSearch.length === 0 || !inputSearch.trim()) return;
         
-        router.push(`/search/id?page=1&limit=25&q=${inputSearch}&order_by=score&sort=desc`);
+        router.push(`/search/id?page=1&limit=25&q=${searchValue}&order_by=score&sort=desc`);
     }
 
     // sets the auxilair

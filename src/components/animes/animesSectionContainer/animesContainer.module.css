@@ -1,6 +1,5 @@
 .animes{
     width: 100%;
-    min-height: 1000px;
     display: flex;
     flex-direction: column;
     gap: 5px;
