@@ -53,10 +53,7 @@ export default function AnimeSection({info} : {info: info}){
 
     const goNext = async (el: HTMLDivElement) : Promise<void> => {
         const getMore = Math.floor(el.scrollLeft + el.clientWidth + 300) >= el.scrollWidth; 
-        let backButton = state.backButton, nextButton = state.nextButton;
-
-        if(!backButton) backButton = true;
-        // case user is at the end
+        let nextButton = state.nextButton;
 
         if (getMore && !loading) { 
             setLoading(true);
@@ -73,7 +70,7 @@ export default function AnimeSection({info} : {info: info}){
             setState(prev => ({
                 animes: [...prev.animes, ...data],
                 page: prev.page + 1,
-                backButton: backButton,
+                backButton: true,
                 nextButton: nextButton
             }));
             
@@ -101,15 +98,13 @@ export default function AnimeSection({info} : {info: info}){
         const el = sectionRef.current;
 
         if(el && state.page > 2){
+            console.log("ola");
             setLoading(false);
             el.scrollLeft = Math.min(el.scrollLeft + el.clientWidth, el.scrollWidth);
         }
 
     },[state.animes]);
 
-    useEffect(()=>{
-        if(info.animes.length < 10) setState((prev: State) => ({...prev, nextButton: false}))
-    },[])
 
     return(
 

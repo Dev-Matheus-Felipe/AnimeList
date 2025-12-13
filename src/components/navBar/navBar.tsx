@@ -40,7 +40,7 @@ export function NavBar(){
     const profileStyle = {
         backgroundImage: (userContext) 
             ? `url("/profilePictures/${userContext.image}a.jpg")` 
-            : " var(--navBar-profile);",
+            : "var(--navBar-profile)",
 
         width:  (userContext) ? "35px" : "22px",
         height: (userContext) ? "35px" : "22px",
