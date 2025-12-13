@@ -2,7 +2,7 @@
 
 import { fetchAnimes, AnimeData, AnimeParams } from "@/lib/api";
 import { useInView } from "react-intersection-observer";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import styles from "./animeSection.module.css";
 import { useRouter } from "next/navigation";
 import { Anime } from "../anime/anime";
@@ -11,7 +11,8 @@ type State = {
     animes: AnimeData[],
     page: number,
     backButton: boolean,
-    nextButton: boolean
+    nextButton: boolean,
+    scroll: number
 }
 
 type info = {
@@ -27,7 +28,8 @@ export default function AnimeSection({info} : {info: info}){
         animes: info.animes,
         page: 2,
         backButton:false,
-        nextButton: true
+        nextButton: true,
+        scroll: 0
     });
 
     const sectionRef = useRef<HTMLDivElement | null>(null);
@@ -44,7 +46,8 @@ export default function AnimeSection({info} : {info: info}){
         setState(prev => ({
             ...prev,
             backButton: (Math.max(0, el.scrollLeft - el.clientWidth) == 0) ? false : true,
-            nextButton: true
+            nextButton: true,
+            scroll: Math.max(0, el.scrollLeft - el.clientWidth)
         }))
     }
 
@@ -71,11 +74,14 @@ export default function AnimeSection({info} : {info: info}){
                 animes: [...prev.animes, ...data],
                 page: prev.page + 1,
                 backButton: true,
-                nextButton: nextButton
+                nextButton: nextButton,
+                scroll: Math.min(el.scrollLeft + el.clientWidth, el.scrollWidth)
             }));
             
-        } else 
+        } else {
             el.scrollLeft = Math.min(el.scrollLeft + el.clientWidth, el.scrollWidth); 
+            setState(prev => ({...prev, scroll: Math.min(el.scrollLeft + el.clientWidth, el.scrollWidth)}))
+        }
     }
 
 
@@ -97,14 +103,20 @@ export default function AnimeSection({info} : {info: info}){
     useEffect(()=>{
         const el = sectionRef.current;
 
-        if(el && state.page > 2){
-            console.log("ola");
+        if(el && state.page > 2 ){
             setLoading(false);
             el.scrollLeft = Math.min(el.scrollLeft + el.clientWidth, el.scrollWidth);
         }
 
     },[state.animes]);
 
+
+    useEffect(()=>{
+        if(state.animes.length < 10) setState(prev => ({...prev, nextButton: false}));
+        const el = sectionRef.current;
+
+        if(el) el.scrollLeft = state.scroll;
+    },[])
 
     return(
 
