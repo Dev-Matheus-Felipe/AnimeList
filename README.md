@@ -66,20 +66,29 @@ To run this project locally, you will need:
 
 ---
 
-## 📦 Installation
+## 📦 Installation 
+
+### Getting Started
 
 Clone the repository:
 
 ```bash
 git clone https://github.com/Dev-Matheus-Felipe/AnimeList.git
+```
 
+Navigate to the project directory:
 
-This project was created with Next.js 16 using create-next-app and expanded into a full anime browsing platform.
+```bash
+cd AnimeList
+```
 
+Install the dependencies:
 
-## Getting Started
+```bash
+npm install
+```
 
-First, run the development server:
+Run the development server:
 
 ```bash
 npm run dev
@@ -91,9 +100,20 @@ pnpm dev
 bun dev
 ```
 
+Open your browser and access:
+
+```
+http://localhost:3000
+```
+
+---
+
+Feel free to contribute or open issues if you find any bugs or have suggestions.
+
+
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/(pages)/(home)/page.tsx`. The page auto-updates as you edit the file.
+You can start editing the page by modifying `app/(pages)/(main)/(home)/page.tsx`. The page auto-updates as you edit the file.
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
