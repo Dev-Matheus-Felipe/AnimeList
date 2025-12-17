@@ -64,15 +64,17 @@ export default function ControlerLoading({ type, startIndex }: { type: "tv" | "m
 
            const data : AnimeData[] = await fetchAnimes({ animeParams });
             if(data) dispatch({type: "nextSection", payload: { title: genre.label, animes: data }})
+
+            setTimeout(() => {
+                setLoading(false);
+            }, 600);
         }
 
         if (inView && state.currentIndex < genresData.length && !loading ){
             setLoading(true);
             getSection();
 
-            setTimeout(() => {
-                setLoading(false);
-            }, 1000);
+            
         }
     }, [inView, state.currentIndex, type, loading]);
 
