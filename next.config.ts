@@ -12,6 +12,10 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: "https",
+        hostname: "myanimelist.net",
+      },
+      {
+        protocol: "https",
         hostname: "animelist-52de5.web.app",
       },
       {
